@@ -1,0 +1,26 @@
+<div class="container">
+    <form>
+        <label for="" id="idLabel">Identificación</label> <br>
+        <input type="text" id="identificacion"name="identificacion" [(ngModel)]="persona.identificacion"> <br>
+        <label for="" id="nombreLabel">Nombre</label> <br>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="persona.nombre"> <br>
+        <label for="" id="nombreLabel">Apellidos</label> <br>
+        <input type="text" id="apellidos" name="apellido" [(ngModel)]="persona.apellido"> <br>
+        <label for="">fecha de nacimiento</label> <br>
+        <input type="date"  id="fechaDeNacimiento" name="fechaDeNacimiento" [(ngModel)]="persona.fechaDeNacimiento"> <br>
+        <label for="">Edad</label> <br>
+        <input type="number" id="edad"name="edad" [(ngModel)]="persona.edad"> <br>
+        <label for="">Genero</label> <br>
+        <div class="col-md-2">
+            <select class="form-select " id="genero" name="genero" [(ngModel)]="persona.genero" aria-label="Default select example">
+
+                <option selected>Seleccione</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+               </select>   
+        </div>
+        <label for="">Direccion de domicilio</label> <br>
+        <input type="text" id="direccion" name="direccion" [(ngModel)]="persona.direccion"> <br>
+       
+    </form>
+</div>
