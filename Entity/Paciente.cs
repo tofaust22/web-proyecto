@@ -15,11 +15,17 @@ namespace Entity
         public string Email { get; set; }
         [NotMapped]
         public List<Cita> Citas { get; set; }
+        public Historia Historia { get; set; }
 
 
         public void AgregarCita(Cita cita)
         {
             Citas.Add(cita);
+        }
+
+        public void CrearHistoria()
+        {
+            Historia = new Historia();
         }
     }
 }

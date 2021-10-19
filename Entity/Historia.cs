@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
     public class Historia
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Codigo { get; set; }
         public List<Informe> Informes { get; set; }

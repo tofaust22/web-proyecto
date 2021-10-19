@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity
 {
-    public class Persona
+    public abstract class Persona
     {
         [Key]
         public string Identificacion { get; set; }

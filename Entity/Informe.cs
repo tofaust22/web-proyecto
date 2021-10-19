@@ -7,6 +7,7 @@ namespace Entity
 {
     public class Informe
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Codigo { get; set; }
         public List<DetalleProducto> Detalles { get; set; }

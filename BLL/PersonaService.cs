@@ -2,6 +2,7 @@ using System;
 using Entity;
 using DAL;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -42,15 +43,59 @@ namespace BLL
             }
         }
 
-        public ResponseClassGeneric<Persona> Consultar()
+        public ResponseClassGeneric<Paciente> ConsultarPacientes()
         {
             try
             {
-                return new ResponseClassGeneric<Persona>(_context.Personas.ToList());
+                var response = _context.Pacientes.Include(p => p.Historia.Informes).ToList();
+                foreach (var item in response)
+                {
+                    foreach (var item2 in item.Historia.Informes)
+                    {
+                        var informe = _context.Informes.Include(d => d.Detalles)
+                                            .Where(d => d.Codigo == item2.Codigo).FirstOrDefault();
+                        item2.Detalles = informe.Detalles;
+                    }
+                }
+                return new ResponseClassGeneric<Paciente>(response);
             }
             catch(Exception e)
             {
-                return new ResponseClassGeneric<Persona>($"Error en la Aplicacion: {e.Message}");
+                return new ResponseClassGeneric<Paciente>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
+
+        public ResponseClassGeneric<Doctor> ConsultarDoctores()
+        {
+            try
+            {
+                return new ResponseClassGeneric<Doctor>(_context.Doctores.ToList());
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Doctor>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
+
+        public ResponseClassGeneric<Paciente> RegistrarInforme(Informe informe, string identificacion)
+        {
+            try
+            {
+                var response = _context.Pacientes.Include( p => p.Historia.Informes)
+                                                .Where( p => p.Identificacion == identificacion).FirstOrDefault();
+                if(response is null)
+                {
+                    return new ResponseClassGeneric<Paciente>("No existe el paciente");
+                }
+                response.Historia.AgregarInforme(informe);
+                _context.Pacientes.Update(response);
+                _context.SaveChanges();
+                return new ResponseClassGeneric<Paciente>(response);
+
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Paciente>($"Error en la Aplicacion: {e.Message}");
             }
         }
     }

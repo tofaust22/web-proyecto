@@ -6,6 +6,7 @@ namespace Entity
 {
     public class DetalleProducto
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Codigo { get; set; }
         public int Cantidad { get; set; }

@@ -11,9 +11,18 @@ namespace DAL
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Cita> Citas { get; set; }
         public DbSet<Especialidad> Especialidades { get; set; }
-
+        public DbSet<Doctor> Doctores { get; set; }
+        public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Producto> Productos { get; set; }
+        public DbSet<Informe> Informes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+           
+            modelBuilder.Entity<Persona>().ToTable("Persona");
+            modelBuilder.Entity<Doctor>().ToTable("Persona");
+            modelBuilder.Entity<Paciente>().ToTable("Persona");
+
             modelBuilder.Entity<Doctor>()
                 .HasOne<Especialidad>().WithMany()
                 .HasForeignKey( d => d.IdEspecialidad );
