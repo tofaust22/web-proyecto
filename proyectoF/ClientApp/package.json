@@ -28,6 +28,8 @@
     "node-sass": "^5.0.0",
     "oidc-client": "^1.11.3",
     "popper.js": "^1.16.0",
+    "primeicons": "^4.1.0",
+    "primeng": "^12.2.1",
     "protractor": "~5.4.2",
     "rxjs": "^6.6.3",
     "ts-node": "~8.4.1",
