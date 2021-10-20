@@ -22,5 +22,6 @@ namespace proyectoF.Models
             Cantidad = producto.Cantidad;
         }
         
+        
     }
 }

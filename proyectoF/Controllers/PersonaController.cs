@@ -23,45 +23,72 @@ namespace proyectoF.Controllers
         {
             Doctor doctor = MapearDoctor(personaInput);
             var response = _service.GuardarDoctor(doctor);
-            if(response.Error)
-            {
-                return BadRequest(response.Mensaje);
-            }
-            return Ok(response.Object);
+            return ResponseHttpDoctor(response, false);
         }
         [HttpPost("Paciente")]
         public ActionResult<PersonaViewModel> GuardarPaciente(PersonaInputModels personaInput)
         {
             Paciente paciente = MapearPaciente(personaInput);
             var response = _service.GuardarPaciente(paciente);
-            if(response.Error)
-            {
-                return BadRequest(response.Mensaje);
-            }
-            return Ok(response.Object);
+            return ResponseHttpPaciente(response, false);
         }
 
         [HttpGet("Doctores")]
         public ActionResult<IEnumerable<PersonaViewModel>> ConsultarDoctores()
         {
             var response = _service.ConsultarDoctores();
-            if(response.Error)
-            {
-                return BadRequest(response.Mensaje);
-            }
-            return Ok(response.Objects);
+            return ResponseHttpDoctor(response, true);
         }
 
         [HttpGet("Pacientes")]
         public ActionResult<IEnumerable<PersonaViewModel>> ConsultarPacientes()
         {
             var response = _service.ConsultarPacientes();
-            if(response.Error)
-            {
-                return BadRequest(response.Mensaje);
-            }
-            return Ok(response.Objects);
+            return ResponseHttpPaciente(response, true);
         }
+
+        [HttpPut("Doctor")]
+        public ActionResult<PersonaViewModel> ModificarDoctor(PersonaInputModels personaInput)
+        {
+            Doctor doctor = MapearDoctor(personaInput);
+            var response = _service.ActualizarDoctor(doctor);
+            return ResponseHttpDoctor(response, false);
+        }
+
+        [HttpPut("Paciente")]
+        public ActionResult<PersonaViewModel> ModificarPaciente(PersonaInputModels personaInput)
+        {
+            Paciente paciente = MapearPaciente(personaInput);
+            var response = _service.ActualizarPaciente(paciente);
+            return ResponseHttpPaciente(response, false);
+        } 
+
+        private ObjectResult ResponseHttpDoctor(ResponseClassGeneric<Doctor> result, bool list)
+        {
+            if(result.Error)
+            {
+                return BadRequest(result.Mensaje);
+            }
+            if(list)
+            {
+                return Ok(result.Objects.Select( p => new PersonaViewModel(p) ));
+            }
+            return Ok(new PersonaViewModel(result.Object));
+        }
+
+        private ObjectResult ResponseHttpPaciente(ResponseClassGeneric<Paciente> result, bool list)
+        {
+            if(result.Error)
+            {
+                return BadRequest(result.Mensaje);
+            }
+            if(list)
+            {
+                return Ok(result.Objects.Select( p => new PersonaViewModel(p) ));
+            }
+            return Ok(new PersonaViewModel(result.Object));
+        }
+
 
 
 

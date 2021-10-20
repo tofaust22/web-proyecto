@@ -98,5 +98,55 @@ namespace BLL
                 return new ResponseClassGeneric<Paciente>($"Error en la Aplicacion: {e.Message}");
             }
         }
+
+        public ResponseClassGeneric<Doctor> ActualizarDoctor(Doctor doctor)
+        {
+            try
+            {
+                var response = _context.Doctores.Where( d => d.Identificacion == doctor.Identificacion).FirstOrDefault();
+                if(response is null)
+                {
+                    return new ResponseClassGeneric<Doctor>("No existe el doctor");
+                }
+                response.PrimerNombre = doctor.PrimerNombre;
+                response.SegundoNombre = doctor.SegundoNombre;
+                response.PrimerApellido = doctor.PrimerApellido;
+                response.SegundoApellido = doctor.SegundoApellido;
+                _context.Doctores.Update(response);
+                _context.SaveChanges();
+                return new ResponseClassGeneric<Doctor>(doctor);
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Doctor>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
+
+        public ResponseClassGeneric<Paciente> ActualizarPaciente(Paciente paciente)
+        {
+            try
+            {
+                var response = _context.Pacientes.Where( d => d.Identificacion == paciente.Identificacion).FirstOrDefault();
+                if(response is null)
+                {
+                    return new ResponseClassGeneric<Paciente>("No existe el doctor");
+                }
+                response.PrimerNombre = paciente.PrimerNombre;
+                response.SegundoNombre = paciente.SegundoNombre;
+                response.PrimerApellido = paciente.PrimerApellido;
+                response.SegundoApellido = paciente.SegundoApellido;
+                response.DepartamentoResidencia = paciente.DepartamentoResidencia;
+                response.Direccion = paciente.Direccion;
+                response.Email = paciente.Email;
+                response.Telefono = paciente.Telefono;
+                _context.Pacientes.Update(response);
+                _context.SaveChanges();
+                return new ResponseClassGeneric<Paciente>(paciente);
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Paciente>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
     }
 }

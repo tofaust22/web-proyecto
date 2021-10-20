@@ -38,6 +38,30 @@ namespace proyectoF.Controllers
             return Ok(response.Objects.Select( p => new ProductoViewModels(p)));
         }
 
+        [HttpPut("UpdateInfo")]
+        public ActionResult<ProductoViewModels> UpdateInfo(ProductoInputModels productoInput)
+        {
+            Producto producto = MapearProducto(productoInput);
+            var response = _service.ModificarInformacion(producto);
+            return ResponseHttp(response);
+        }
+
+        [HttpPut("DiscountAmount")]
+        public ActionResult<ProductoViewModels> DiscountAmount(ProductoInputModels productoInput)
+        {
+            Producto producto = MapearProducto(productoInput);
+            var response = _service.DescontarCantidad(producto, producto.Cantidad);
+            return ResponseHttp(response);
+        }
+
+        [HttpPut("UpdateAmount")]
+        public ActionResult<ProductoViewModels> UpdateAmount(ProductoInputModels productoInput)
+        {
+            Producto producto = MapearProducto(productoInput);
+            var response = _service.ActualizarCantidad(producto, producto.Cantidad);
+            return ResponseHttp(response);
+        }
+
         [HttpGet("{codigo}")]
         public ActionResult<ProductoViewModels> Buscar(string codigo)
         {
