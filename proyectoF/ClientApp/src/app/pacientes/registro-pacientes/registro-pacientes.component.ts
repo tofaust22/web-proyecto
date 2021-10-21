@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroPacientesComponent implements OnInit {
 
+  picker: Date;
   constructor() { }
 
   ngOnInit(): void {

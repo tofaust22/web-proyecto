@@ -15,7 +15,20 @@ import { CrearGastoComponent } from './gastos/crear-gasto/crear-gasto.component'
 import { ListaGastoComponent } from './gastos/lista-gasto/lista-gasto.component';
 import { ListaReciboComponent } from './recibos/lista-recibo/lista-recibo.component';
 import { CrearReciboComponent } from './recibos/crear-recibo/crear-recibo.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import { EspecialidadRegistroComponent } from './Especialidad/especialidad-registro/especialidad-registro.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ProductoRegistroComponent } from './producto/producto-registro/producto-registro.component';
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,23 +41,24 @@ import { CrearReciboComponent } from './recibos/crear-recibo/crear-recibo.compon
     CrearGastoComponent,
     ListaGastoComponent,
     ListaReciboComponent,
-    CrearReciboComponent
+    CrearReciboComponent,
+    EspecialidadRegistroComponent,
+    ProductoRegistroComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'registro-pacientes', component: RegistroPacientesComponent},
-      { path: 'lista-pacientes', component: ListaPacientesComponent},
-      { path: 'lista-gasto', component: ListaGastoComponent},
-      { path: 'crear-gasto', component: CrearGastoComponent},
-      { path: 'lista-recibo', component: ListaReciboComponent},
-      { path: 'crear-recibo', component: CrearGastoComponent},
-    ])
+    BrowserAnimationsModule,
+    MatGridListModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatCardModule,
+    MatButtonModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

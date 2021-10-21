@@ -1,26 +1,106 @@
 <div class="container">
-    <form>
-        <label for="" id="idLabel">Identificación</label> <br>
-        <input type="text" id="identificacion"name="identificacion" [(ngModel)]="persona.identificacion"> <br>
-        <label for="" id="nombreLabel">Nombre</label> <br>
-        <input type="text" id="nombre" name="nombre" [(ngModel)]="persona.nombre"> <br>
-        <label for="" id="nombreLabel">Apellidos</label> <br>
-        <input type="text" id="apellidos" name="apellido" [(ngModel)]="persona.apellido"> <br>
-        <label for="">fecha de nacimiento</label> <br>
-        <input type="date"  id="fechaDeNacimiento" name="fechaDeNacimiento" [(ngModel)]="persona.fechaDeNacimiento"> <br>
-        <label for="">Edad</label> <br>
-        <input type="number" id="edad"name="edad" [(ngModel)]="persona.edad"> <br>
-        <label for="">Genero</label> <br>
-        <div class="col-md-2">
-            <select class="form-select " id="genero" name="genero" [(ngModel)]="persona.genero" aria-label="Default select example">
+    <mat-grid-list gutterSize="20px" cols="1" rowHeight="120px">
+        <form>
 
-                <option selected>Seleccione</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
-               </select>   
-        </div>
-        <label for="">Direccion de domicilio</label> <br>
-        <input type="text" id="direccion" name="direccion" [(ngModel)]="persona.direccion"> <br>
-       
-    </form>
+                    <mat-grid-tile > 
+                        <div>
+                            <mat-form-field  >
+                                <mat-label>Primer Nombre</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div style="padding-left: 5%;">
+                            <mat-form-field  >
+                                <mat-label>Segundo Nombre</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+            
+                        <div style="padding-left: 5%;">
+                            <mat-form-field  >
+                                <mat-label>Primer Apellido</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+            
+                        <div style="padding-left: 5%;">
+                            <mat-form-field  >
+                                <mat-label>Segundo Apellido</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        
+                    
+                    </mat-grid-tile>
+                    <mat-grid-tile >
+                        <div>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Fecha de Nacimiento</mat-label>
+                                <input matInput [matDatepicker]="picker">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+            
+                        <div style="padding-left: 5%;">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Genero</mat-label>
+                                <mat-select>
+                                  <mat-option value="Masculino">
+                                    Masculino
+                                  </mat-option>
+                                  <mat-option value="Femenino">
+                                    Femenino
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+            
+                        <div style="padding-left: 5%;">
+                            <mat-form-field  >
+                                <mat-label>Telefono</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+            
+                        <div style="padding-left: 5%;">
+                            <mat-form-field  >
+                                <mat-label>Tipo Aseguradora</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+            
+                    <mat-grid-tile >
+                        <div>
+                            <mat-form-field  >
+                                <mat-label>Departamento residencia</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+            
+                        <div style="padding-left: 7%;">
+                            <mat-form-field  >
+                                <mat-label>Email</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+            
+                        <div style="padding-left: 7%;">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Direccion</mat-label>
+                                <textarea matInput ></textarea>
+                              </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div>
+                            <button mat-raised-button color="primary">Guardar</button>
+                        </div>
+                        <div style="padding-left: 3%;">
+                            <button mat-raised-button color="warn"> Cancelar </button>
+                        </div>
+                    </mat-grid-tile>
+        </form>
+      </mat-grid-list>
 </div>
