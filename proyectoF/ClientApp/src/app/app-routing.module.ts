@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CounterComponent } from './counter/counter.component';
+import { DoctorRegistroComponent } from './doctor/doctor-registro/doctor-registro.component';
 import { EspecialidadRegistroComponent } from './Especialidad/especialidad-registro/especialidad-registro.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { CrearGastoComponent } from './gastos/crear-gasto/crear-gasto.component';
@@ -10,6 +11,7 @@ import { ListaPacientesComponent } from './pacientes/lista-pacientes/lista-pacie
 import { RegistroPacientesComponent } from './pacientes/registro-pacientes/registro-pacientes.component';
 import { ProductoRegistroComponent } from './producto/producto-registro/producto-registro.component';
 import { ListaReciboComponent } from './recibos/lista-recibo/lista-recibo.component';
+import { CitaRegistroComponent } from './cita/cita-registro/cita-registro.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'crear-recibo', component: CrearGastoComponent},
   { path: 'registro-especialidad', component: EspecialidadRegistroComponent },
   { path: 'registro-productos', component: ProductoRegistroComponent},
+  { path: 'registro-doctor', component: DoctorRegistroComponent },
+  { path: 'registro-cita', component:  CitaRegistroComponent}
 ];
 
 @NgModule({

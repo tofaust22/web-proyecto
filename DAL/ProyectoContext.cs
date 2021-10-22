@@ -29,8 +29,8 @@ namespace DAL
                 .HasForeignKey( d => d.IdEspecialidad );
             
             modelBuilder.Entity<Cita>()
-                .HasOne<Agenda>().WithMany()
-                .HasForeignKey( c => c.CodigoAgenda );
+                .HasOne<Ageda>().WithMany()
+                .HasForeignKney( c => c.CodigoAgenda );
 
             modelBuilder.Entity<Cita>()
                 .HasOne<Paciente>().WithMany()

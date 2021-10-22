@@ -3,14 +3,13 @@
         <form>
 
                     <mat-grid-tile > 
-
                         <div>
                             <mat-form-field  >
                                 <mat-label>Identificacion</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="doctor.identificacion" name="identificacion" 
+                                    id="identificacion">
                             </mat-form-field>
                         </div>
-
                         <div>
                             <mat-form-field  style="padding-left: 5%;">
                                 <mat-label>Primer Nombre</mat-label>
@@ -49,61 +48,27 @@
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
                         </div>
-            
+
                         <div style="padding-left: 5%;">
                             <mat-form-field appearance="fill">
-                                <mat-label>Genero</mat-label>
+                                <mat-label>Especialidad</mat-label>
                                 <mat-select>
-                                  <mat-option value="Masculino">
-                                    Masculino
-                                  </mat-option>
-                                  <mat-option value="Femenino">
-                                    Femenino
+                                  <mat-option value="Masculino" [value]="especialidad.codigo" *ngFor="let especialidad of especialidades">
+                                    {{especialidad.nombre}}
                                   </mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
-            
-                        <div style="padding-left: 5%;">
-                            <mat-form-field  >
-                                <mat-label>Telefono</mat-label>
-                                <input matInput>
-                            </mat-form-field>
-                        </div>
-            
-                        <div style="padding-left: 5%;">
-                            <mat-form-field  >
-                                <mat-label>Tipo Aseguradora</mat-label>
-                                <input matInput>
-                            </mat-form-field>
-                        </div>
                     </mat-grid-tile>
-            
-                    <mat-grid-tile >
-                        <div>
-                            <mat-form-field  >
-                                <mat-label>Departamento residencia</mat-label>
-                                <input matInput>
-                            </mat-form-field>
-                        </div>
-            
-                        <div style="padding-left: 7%;">
-                            <mat-form-field  >
-                                <mat-label>Email</mat-label>
-                                <input matInput>
-                            </mat-form-field>
-                        </div>
-            
-                        <div style="padding-left: 7%;">
-                            <mat-form-field class="example-full-width" appearance="fill">
-                                <mat-label>Direccion</mat-label>
-                                <textarea matInput ></textarea>
-                              </mat-form-field>
-                        </div>
-                    </mat-grid-tile>
+
+
+                        
                     <mat-grid-tile>
+
+
+                    
                         <div>
-                            <button mat-raised-button color="primary">Guardar</button>
+                            <button (click)="guardar()" mat-raised-button color="primary">Guardar</button>
                         </div>
                         <div style="padding-left: 3%;">
                             <button mat-raised-button color="warn"> Cancelar </button>
