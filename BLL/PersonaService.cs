@@ -69,7 +69,12 @@ namespace BLL
         {
             try
             {
-                return new ResponseClassGeneric<Doctor>(_context.Doctores.ToList());
+                var doctores = _context.Doctores.Include( d => d.Agenda ).ToList();
+                foreach (var item in doctores)
+                {
+                    item.Especialidad = _context.Especialidades.Find(item.IdEspecialidad);
+                }
+                return new ResponseClassGeneric<Doctor>(doctores);
             }
             catch(Exception e)
             {
@@ -142,6 +147,23 @@ namespace BLL
                 _context.Pacientes.Update(response);
                 _context.SaveChanges();
                 return new ResponseClassGeneric<Paciente>(paciente);
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Paciente>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
+
+        public ResponseClassGeneric<Paciente> BuscarPaciente(string id)
+        {
+            try
+            {
+                var response = _context.Pacientes.Find(id);
+                if(response is null)
+                {
+                    return new ResponseClassGeneric<Paciente>("No existe el paciente");
+                }
+                return new ResponseClassGeneric<Paciente>(response);
             }
             catch(Exception e)
             {

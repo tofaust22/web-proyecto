@@ -5,36 +5,41 @@
                     <mat-grid-tile > 
 
                         <div>
-                            <mat-form-field  >
+                            <mat-form-field  class="example-full-width" >
                                 <mat-label>Identificacion</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.identificacion"
+                                name="identificacion" id="identificacion">
                             </mat-form-field>
                         </div>
 
                         <div>
-                            <mat-form-field  style="padding-left: 5%;">
+                            <mat-form-field  style="padding-left: 5%;"  >
                                 <mat-label>Primer Nombre</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.primerNombre"
+                                name="firstName" id="firstName">
                             </mat-form-field>
                         </div>
-                        <div style="padding-left: 5%;">
-                            <mat-form-field  >
+                        <div style="padding-left: 3%;">
+                            <mat-form-field  class="example-full-width" >
                                 <mat-label>Segundo Nombre</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.segundoNombre"
+                                name="segundoNombre" id="segundoNombre">
                             </mat-form-field>
                         </div>
             
                         <div style="padding-left: 5%;">
-                            <mat-form-field  >
+                            <mat-form-field  class="example-full-width" >
                                 <mat-label>Primer Apellido</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.primerApellido"
+                                name="lastName" id="lastName">
                             </mat-form-field>
                         </div>
             
                         <div style="padding-left: 5%;">
-                            <mat-form-field  >
+                            <mat-form-field  class="example-full-width">
                                 <mat-label>Segundo Apellido</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.segundoApellido"
+                                name="segundoNombre" id="segundoNombre">
                             </mat-form-field>
                         </div>
                         
@@ -44,7 +49,8 @@
                         <div>
                             <mat-form-field appearance="fill">
                                 <mat-label>Fecha de Nacimiento</mat-label>
-                                <input matInput [matDatepicker]="picker">
+                                <input matInput [matDatepicker]="picker" [(ngModel)]="paciente.fechaNacimiento"
+                                name="fecha" id="fecha">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
@@ -53,7 +59,8 @@
                         <div style="padding-left: 5%;">
                             <mat-form-field appearance="fill">
                                 <mat-label>Genero</mat-label>
-                                <mat-select>
+                                <mat-select [(ngModel)]="paciente.genero"
+                                name="genero" id="genero">
                                   <mat-option value="Masculino">
                                     Masculino
                                   </mat-option>
@@ -65,45 +72,58 @@
                         </div>
             
                         <div style="padding-left: 5%;">
-                            <mat-form-field  >
+                            <mat-form-field  class="example-full-width" appearance="fill">
                                 <mat-label>Telefono</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.telefono"
+                                name="telefono" id="telefono">
                             </mat-form-field>
                         </div>
             
                         <div style="padding-left: 5%;">
-                            <mat-form-field  >
+                            <mat-form-field  class="example-full-width" appearance="fill">
                                 <mat-label>Tipo Aseguradora</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.tipoAseguradora"
+                                name="tipoAseguradora" id="tipoAseguradora">
                             </mat-form-field>
                         </div>
                     </mat-grid-tile>
             
                     <mat-grid-tile >
                         <div>
-                            <mat-form-field  >
+                            <mat-form-field  class="example-full-width" appearance="fill">
+                                <mat-label>Ocupacion</mat-label>
+                                <input matInput [(ngModel)]="paciente.ocupacion"
+                                name="ocupacion" id="ocupacion">
+                            </mat-form-field>
+                        </div>
+
+                        <div style="padding-left: 5%;">
+                            <mat-form-field  class="example-full-width" appearance="fill">
                                 <mat-label>Departamento residencia</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.departamentoResidencia"
+                                name="departamento" id="departemento">
                             </mat-form-field>
                         </div>
             
                         <div style="padding-left: 7%;">
-                            <mat-form-field  >
+                            <mat-form-field  class="example-full-width" appearance="fill">
                                 <mat-label>Email</mat-label>
-                                <input matInput>
+                                <input matInput [(ngModel)]="paciente.email"
+                                name="email" id="email">
                             </mat-form-field>
                         </div>
             
                         <div style="padding-left: 7%;">
                             <mat-form-field class="example-full-width" appearance="fill">
                                 <mat-label>Direccion</mat-label>
-                                <textarea matInput ></textarea>
+                                <textarea matInput [(ngModel)]="paciente.direccion"
+                                name="direccion" id="direccion"></textarea>
                               </mat-form-field>
                         </div>
                     </mat-grid-tile>
                     <mat-grid-tile>
                         <div>
-                            <button mat-raised-button color="primary">Guardar</button>
+                            <button (click)="guardar()" mat-raised-button color="primary">Guardar</button>
                         </div>
                         <div style="padding-left: 3%;">
                             <button mat-raised-button color="warn"> Cancelar </button>

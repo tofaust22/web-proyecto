@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Paciente } from 'src/app/models/paciente';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-registro-pacientes',
@@ -7,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroPacientesComponent implements OnInit {
 
-  picker: Date;
-  constructor() { }
+  paciente: Paciente;
+  constructor(private servicePersona: PersonaService) { }
 
   ngOnInit(): void {
+    this.paciente = new Paciente();
+  }
+
+  guardar(){
+    this.servicePersona.postPaciente(this.paciente).subscribe(result => {
+      if(result != null){
+        console.log(this.paciente);
+      }
+    })
   }
 
 }

@@ -19,13 +19,14 @@ namespace BLL
         {
             try
             {
-                Doctor doctor = _context.Doctores.Include( d => d.Agenda).Where( d => d.Codigo == cita.Doctor.Identificacion)
+                Doctor doctor = _context.Doctores.Include( d => d.Agenda).Where( d => d.Identificacion == cita.Doctor.Identificacion)
                                                     .FirstOrDefault();
-                doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
+                
                 if(doctor is null)
                 {
                     return new ResponseClassGeneric<Cita>("Error al apartar la cita, el doctor no existe.");
                 }
+                doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
                 var citas = _context.Citas.Where( c => c.CodigoAgenda == doctor.Agenda.Codigo && c.FechaRegistro > DateTime.Now ).OrderBy(f => f.FechaRegistro).ToList();
                 DateTime fecha = DateTime.Now;
                 if(citas.Count == 0)

@@ -13,27 +13,31 @@
                         <div>
                             <mat-form-field  style="padding-left: 5%;">
                                 <mat-label>Primer Nombre</mat-label>
-                                <input matInput>
+                                <input [(ngModel)]="doctor.primerNombre" matInput name="firstName"
+                                id="firstName">
                             </mat-form-field>
                         </div>
                         <div style="padding-left: 5%;">
                             <mat-form-field  >
                                 <mat-label>Segundo Nombre</mat-label>
-                                <input matInput>
+                                <input [(ngModel)]="doctor.segundoNombre" matInput name="segundoNombre"
+                                id="segundoNombre">
                             </mat-form-field>
                         </div>
             
                         <div style="padding-left: 5%;">
                             <mat-form-field  >
                                 <mat-label>Primer Apellido</mat-label>
-                                <input matInput>
+                                <input [(ngModel)]="doctor.primerApellido"  matInput name="lastName"
+                                id="lastName">
                             </mat-form-field>
                         </div>
             
                         <div style="padding-left: 5%;">
                             <mat-form-field  >
                                 <mat-label>Segundo Apellido</mat-label>
-                                <input matInput>
+                                <input [(ngModel)]="doctor.segundoApellido" matInput name="segundoApellido"
+                                id="segundoApellido">
                             </mat-form-field>
                         </div>
                         
@@ -43,7 +47,8 @@
                         <div>
                             <mat-form-field appearance="fill">
                                 <mat-label>Fecha de Nacimiento</mat-label>
-                                <input matInput [matDatepicker]="picker">
+                                <input [(ngModel)]="doctor.fechaNacimiento" matInput [matDatepicker]="picker"
+                                name="fecha" id="fecha">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
@@ -52,11 +57,18 @@
                         <div style="padding-left: 5%;">
                             <mat-form-field appearance="fill">
                                 <mat-label>Especialidad</mat-label>
-                                <mat-select>
-                                  <mat-option value="Masculino" [value]="especialidad.codigo" *ngFor="let especialidad of especialidades">
+                                <mat-select [(ngModel)]="especialidad" name="especialidad" id="especialidad">
+                                  <mat-option value="Masculino" [value]="especialidad" *ngFor="let especialidad of especialidades">
                                     {{especialidad.nombre}}
                                   </mat-option>
                                 </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div style="padding-left: 5%;">
+                            <mat-form-field  >
+                                <mat-label>Codigo</mat-label>
+                                <input [(ngModel)]="doctor.codigo" matInput name="codigo" id="codigo">
                             </mat-form-field>
                         </div>
                     </mat-grid-tile>

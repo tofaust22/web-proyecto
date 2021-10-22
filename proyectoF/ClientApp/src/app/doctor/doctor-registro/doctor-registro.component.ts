@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Doctor } from 'src/app/models/doctor';
 import { Especialidad } from 'src/app/models/especialidad';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-doctor-registro',
@@ -11,11 +12,13 @@ import { EspecialidadService } from 'src/app/services/especialidad.service';
 export class DoctorRegistroComponent implements OnInit {
   especialidades: Especialidad[];
   doctor: Doctor;
-  constructor(private serviceEspecialidad: EspecialidadService) { }
+  especialidad: Especialidad;
+  constructor(private serviceEspecialidad: EspecialidadService, private servicePersona: PersonaService) { }
 
   ngOnInit(): void {
     this.especialidades = [];
     this.doctor = new Doctor();
+    this.especialidad = new Especialidad();
     this.getEspecialidad();
   }
 
@@ -28,7 +31,13 @@ export class DoctorRegistroComponent implements OnInit {
   }
 
   guardar(){
-    console.log(this.doctor);
+    this.doctor.especialidad = this.especialidad;
+    this.servicePersona.post(this.doctor).subscribe(result => {
+      if(result != null)
+      {
+        console.log(result);
+      }
+    });
   }
 
 }

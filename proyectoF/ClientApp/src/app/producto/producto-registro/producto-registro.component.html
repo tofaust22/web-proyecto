@@ -7,30 +7,34 @@
             <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Nombre</mat-label>
-                    <input matInput  value="Sushi">
+                    <input matInput [(ngModel)]="producto.nombre"
+                    name="nombre" id="nombre">
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Descripcion</mat-label>
-                    <textarea matInput ></textarea>
+                    <textarea matInput [(ngModel)]="producto.descripcion"
+                    name="descripcion" id="descripcion"></textarea>
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Valor</mat-label>
-                    <input matInput value="Sushi">
+                    <input matInput [(ngModel)]="producto.valor"
+                    name="valor" id="valor" type="number">
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Cantidad</mat-label>
-                    <input matInput value="Sushi">
+                    <input matInput [(ngModel)]="producto.cantidad"
+                    name="cantidad" id="cantidad" type="number">
                 </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile>
-                <button mat-raised-button color="primary">Guardar</button>
+                <button (click)="guardar()" mat-raised-button color="primary">Guardar</button>
                 <div style="padding-left: 5%;">
                     <button mat-raised-button color="warn">Cancelar</button>
                 </div>

@@ -47,6 +47,13 @@ namespace proyectoF.Controllers
             return ResponseHttpPaciente(response, true);
         }
 
+        [HttpGet("Paciente/{id}")]
+        public ActionResult<PersonaViewModel> BuscarPaciente(string id)
+        {
+            var response = _service.BuscarPaciente(id);
+            return ResponseHttpPaciente(response, false);
+        }
+
         [HttpPut("Doctor")]
         public ActionResult<PersonaViewModel> ModificarDoctor(PersonaInputModels personaInput)
         {
@@ -104,7 +111,12 @@ namespace proyectoF.Controllers
                 SegundoApellido = personaInput.SegundoApellido,
                 FechaNacimiento = personaInput.FechaNacimiento,
                 Codigo = personaInput.Codigo,
-                IdEspecialidad = personaInput.Especialidad.Codigo
+                IdEspecialidad = personaInput.Especialidad.Codigo,
+                Especialidad = new Especialidad()
+                {
+                    Codigo = personaInput.Especialidad.Codigo,
+                    Nombre = personaInput.Especialidad.Nombre
+                }
             };
             doctor.CalcularEdad();
             doctor.CrearAgenda();
