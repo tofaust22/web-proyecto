@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using DAL;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -18,8 +19,41 @@ namespace BLL
         {
             try
             {
+                Doctor doctor = _context.Doctores.Include( d => d.Agenda).Where( d => d.Codigo == cita.Doctor.Identificacion)
+                                                    .FirstOrDefault();
+                doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
+                if(doctor is null)
+                {
+                    return new ResponseClassGeneric<Cita>("Error al apartar la cita, el doctor no existe.");
+                }
+                var citas = _context.Citas.Where( c => c.CodigoAgenda == doctor.Agenda.Codigo && c.FechaRegistro > DateTime.Now ).OrderBy(f => f.FechaRegistro).ToList();
+                DateTime fecha = DateTime.Now;
+                if(citas.Count == 0)
+                {
+                    fecha = fecha.AddMinutes(30);
+                }
+                else
+                {
+                    var citaResult = citas.Last();
+                    fecha = citaResult.FechaRegistro.AddMinutes(30);
+                }
+                
+                if(fecha.Hour > 20 && fecha.Minute >= 0)
+                {
+                    return new ResponseClassGeneric<Cita>("No hay citas disponibles");
+                }
+                cita.FechaRegistro = fecha;
+                cita.CodigoAgenda = doctor.Agenda.Codigo;
                 _context.Citas.Add(cita);
                 _context.SaveChanges();
+                cita.Doctor = doctor;
+                var paciente = _context.Pacientes.Include(p => p.Historia.Informes).FirstOrDefault();
+                    foreach (var item2 in paciente.Historia.Informes)
+                    {
+                        var informe = _context.Informes.Include(d => d.Detalles)
+                                            .Where(d => d.Codigo == item2.Codigo).FirstOrDefault();
+                        item2.Detalles = informe.Detalles;
+                    }
                 return new ResponseClassGeneric<Cita>(cita);
             }
             catch(Exception e)

@@ -8,6 +8,18 @@ namespace DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Agenda",
+                columns: table => new
+                {
+                    Codigo = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Agenda", x => x.Codigo);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Especialidades",
                 columns: table => new
                 {
@@ -31,7 +43,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Producto",
+                name: "Productos",
                 columns: table => new
                 {
                     Codigo = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -42,7 +54,7 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Producto", x => x.Codigo);
+                    table.PrimaryKey("PK_Productos", x => x.Codigo);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,6 +71,7 @@ namespace DAL.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Codigo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdEspecialidad = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AgendaCodigo = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Genero = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -71,6 +84,12 @@ namespace DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Persona", x => x.Identificacion);
+                    table.ForeignKey(
+                        name: "FK_Persona_Agenda_AgendaCodigo",
+                        column: x => x.AgendaCodigo,
+                        principalTable: "Agenda",
+                        principalColumn: "Codigo",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Persona_Especialidades_IdEspecialidad",
                         column: x => x.IdEspecialidad,
@@ -93,17 +112,17 @@ namespace DAL.Migrations
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Estado = table.Column<bool>(type: "bit", nullable: false),
                     Observaciones = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdDoctor = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    IdPaciente = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    IdPaciente = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CodigoAgenda = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Citas", x => x.Codigo);
                     table.ForeignKey(
-                        name: "FK_Citas_Persona_IdDoctor",
-                        column: x => x.IdDoctor,
-                        principalTable: "Persona",
-                        principalColumn: "Identificacion",
+                        name: "FK_Citas_Agenda_CodigoAgenda",
+                        column: x => x.CodigoAgenda,
+                        principalTable: "Agenda",
+                        principalColumn: "Codigo",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Citas_Persona_IdPaciente",
@@ -114,7 +133,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Informe",
+                name: "Informes",
                 columns: table => new
                 {
                     Codigo = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -124,15 +143,15 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Informe", x => x.Codigo);
+                    table.PrimaryKey("PK_Informes", x => x.Codigo);
                     table.ForeignKey(
-                        name: "FK_Informe_Historia_HistoriaCodigo",
+                        name: "FK_Informes_Historia_HistoriaCodigo",
                         column: x => x.HistoriaCodigo,
                         principalTable: "Historia",
                         principalColumn: "Codigo",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Informe_Persona_IdDoctor",
+                        name: "FK_Informes_Persona_IdDoctor",
                         column: x => x.IdDoctor,
                         principalTable: "Persona",
                         principalColumn: "Identificacion",
@@ -154,23 +173,36 @@ namespace DAL.Migrations
                 {
                     table.PrimaryKey("PK_DetalleProducto", x => x.Codigo);
                     table.ForeignKey(
-                        name: "FK_DetalleProducto_Informe_InformeCodigo",
+                        name: "FK_DetalleProducto_Informes_InformeCodigo",
                         column: x => x.InformeCodigo,
-                        principalTable: "Informe",
+                        principalTable: "Informes",
                         principalColumn: "Codigo",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DetalleProducto_Producto_IdProducto",
+                        name: "FK_DetalleProducto_Productos_IdProducto",
                         column: x => x.IdProducto,
-                        principalTable: "Producto",
+                        principalTable: "Productos",
                         principalColumn: "Codigo",
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Especialidades",
+                columns: new[] { "Codigo", "Nombre" },
+                values: new object[,]
+                {
+                    { "123", "Odontólogo general" },
+                    { "1234", "Odontopediatra" },
+                    { "1235", "Periodoncista" },
+                    { "1236", "Endodoncista" },
+                    { "1237", "Cirujano Oral" },
+                    { "1238", "Prostodoncista" }
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Citas_IdDoctor",
+                name: "IX_Citas_CodigoAgenda",
                 table: "Citas",
-                column: "IdDoctor");
+                column: "CodigoAgenda");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Citas_IdPaciente",
@@ -188,14 +220,19 @@ namespace DAL.Migrations
                 column: "InformeCodigo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Informe_HistoriaCodigo",
-                table: "Informe",
+                name: "IX_Informes_HistoriaCodigo",
+                table: "Informes",
                 column: "HistoriaCodigo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Informe_IdDoctor",
-                table: "Informe",
+                name: "IX_Informes_IdDoctor",
+                table: "Informes",
                 column: "IdDoctor");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Persona_AgendaCodigo",
+                table: "Persona",
+                column: "AgendaCodigo");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Persona_HistoriaCodigo",
@@ -217,13 +254,16 @@ namespace DAL.Migrations
                 name: "DetalleProducto");
 
             migrationBuilder.DropTable(
-                name: "Informe");
+                name: "Informes");
 
             migrationBuilder.DropTable(
-                name: "Producto");
+                name: "Productos");
 
             migrationBuilder.DropTable(
                 name: "Persona");
+
+            migrationBuilder.DropTable(
+                name: "Agenda");
 
             migrationBuilder.DropTable(
                 name: "Especialidades");

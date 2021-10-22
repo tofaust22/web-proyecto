@@ -4,6 +4,7 @@ namespace proyectoF.Models
 {
     public class EspecialidadInputModels
     {
+        public string Codigo { get; set; }
         public string Nombre { get; set; }
     }
 
@@ -14,7 +15,6 @@ namespace proyectoF.Models
             Codigo = especialidad.Codigo;
             Nombre = especialidad.Nombre;
         }
-        public string Codigo { get; set; }
     }
 
 

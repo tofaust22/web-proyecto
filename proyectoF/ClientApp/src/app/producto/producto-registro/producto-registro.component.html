@@ -1,1 +1,44 @@
-<p>producto-registro works!</p>
+<div class="container">
+    <div style="align-items: center;">
+        <h1>Registro Producto</h1>
+    </div>
+    <form class="example-form">
+        <mat-grid-list cols="1" rowHeight="110px">
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput  value="Sushi">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Descripcion</mat-label>
+                    <textarea matInput ></textarea>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Valor</mat-label>
+                    <input matInput value="Sushi">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Cantidad</mat-label>
+                    <input matInput value="Sushi">
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <button mat-raised-button color="primary">Guardar</button>
+                <div style="padding-left: 5%;">
+                    <button mat-raised-button color="warn">Cancelar</button>
+                </div>
+                
+            </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+</div>
+
+
+

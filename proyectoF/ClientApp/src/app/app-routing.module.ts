@@ -8,6 +8,7 @@ import { ListaGastoComponent } from './gastos/lista-gasto/lista-gasto.component'
 import { HomeComponent } from './home/home.component';
 import { ListaPacientesComponent } from './pacientes/lista-pacientes/lista-pacientes.component';
 import { RegistroPacientesComponent } from './pacientes/registro-pacientes/registro-pacientes.component';
+import { ProductoRegistroComponent } from './producto/producto-registro/producto-registro.component';
 import { ListaReciboComponent } from './recibos/lista-recibo/lista-recibo.component';
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'crear-gasto', component: CrearGastoComponent},
   { path: 'lista-recibo', component: ListaReciboComponent},
   { path: 'crear-recibo', component: CrearGastoComponent},
-  { path: 'registro-especialidad', component: EspecialidadRegistroComponent }
+  { path: 'registro-especialidad', component: EspecialidadRegistroComponent },
+  { path: 'registro-productos', component: ProductoRegistroComponent},
 ];
 
 @NgModule({

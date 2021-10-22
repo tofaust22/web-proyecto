@@ -107,6 +107,7 @@ namespace proyectoF.Controllers
                 IdEspecialidad = personaInput.Especialidad.Codigo
             };
             doctor.CalcularEdad();
+            doctor.CrearAgenda();
             return doctor;
         }
 

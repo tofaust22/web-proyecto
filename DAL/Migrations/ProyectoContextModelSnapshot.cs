@@ -19,9 +19,27 @@ namespace DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Entity.Agenda", b =>
+                {
+                    b.Property<string>("Codigo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Codigo");
+
+                    b.ToTable("Agenda");
+                });
+
             modelBuilder.Entity("Entity.Cita", b =>
                 {
                     b.Property<string>("Codigo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CodigoAgenda")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Estado")
@@ -29,9 +47,6 @@ namespace DAL.Migrations
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("IdDoctor")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("IdPaciente")
                         .HasColumnType("nvarchar(450)");
@@ -41,7 +56,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Codigo");
 
-                    b.HasIndex("IdDoctor");
+                    b.HasIndex("CodigoAgenda");
 
                     b.HasIndex("IdPaciente");
 
@@ -90,6 +105,38 @@ namespace DAL.Migrations
                     b.HasKey("Codigo");
 
                     b.ToTable("Especialidades");
+
+                    b.HasData(
+                        new
+                        {
+                            Codigo = "123",
+                            Nombre = "Odontólogo general"
+                        },
+                        new
+                        {
+                            Codigo = "1234",
+                            Nombre = "Odontopediatra"
+                        },
+                        new
+                        {
+                            Codigo = "1235",
+                            Nombre = "Periodoncista"
+                        },
+                        new
+                        {
+                            Codigo = "1236",
+                            Nombre = "Endodoncista"
+                        },
+                        new
+                        {
+                            Codigo = "1237",
+                            Nombre = "Cirujano Oral"
+                        },
+                        new
+                        {
+                            Codigo = "1238",
+                            Nombre = "Prostodoncista"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Historia", b =>
@@ -188,11 +235,16 @@ namespace DAL.Migrations
                 {
                     b.HasBaseType("Entity.Persona");
 
+                    b.Property<string>("AgendaCodigo")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Codigo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdEspecialidad")
                         .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("AgendaCodigo");
 
                     b.HasIndex("IdEspecialidad");
 
@@ -238,11 +290,11 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Entity.Cita", b =>
                 {
-                    b.HasOne("Entity.Doctor", null)
+                    b.HasOne("Entity.Agenda", null)
                         .WithMany()
-                        .HasForeignKey("IdDoctor");
+                        .HasForeignKey("CodigoAgenda");
 
-                    b.HasOne("Entity.Doctor", null)
+                    b.HasOne("Entity.Paciente", null)
                         .WithMany()
                         .HasForeignKey("IdPaciente");
                 });
@@ -271,9 +323,15 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Entity.Doctor", b =>
                 {
+                    b.HasOne("Entity.Agenda", "Agenda")
+                        .WithMany()
+                        .HasForeignKey("AgendaCodigo");
+
                     b.HasOne("Entity.Especialidad", null)
                         .WithMany()
                         .HasForeignKey("IdEspecialidad");
+
+                    b.Navigation("Agenda");
                 });
 
             modelBuilder.Entity("Entity.Paciente", b =>

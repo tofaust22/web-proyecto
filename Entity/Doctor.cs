@@ -12,12 +12,17 @@ namespace Entity
         [NotMapped]
         public List<Cita> Citas { get; set; }
         public string IdEspecialidad { get; set; }
+        public Agenda Agenda { get; set; }
 
 
         public void AgregarEspecialidad(Especialidad especialidad)
         {
             Especialidad = especialidad;
             IdEspecialidad = especialidad.Codigo;
+        }
+        public void CrearAgenda()
+        {
+            Agenda = new Agenda(){Estado = true};
         }
     }
 }

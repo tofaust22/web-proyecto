@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Entity;
+using System.Collections.Generic;
 
 namespace DAL
 {
@@ -28,11 +29,11 @@ namespace DAL
                 .HasForeignKey( d => d.IdEspecialidad );
             
             modelBuilder.Entity<Cita>()
-                .HasOne<Doctor>().WithMany()
-                .HasForeignKey( c => c.IdDoctor );
+                .HasOne<Agenda>().WithMany()
+                .HasForeignKey( c => c.CodigoAgenda );
 
             modelBuilder.Entity<Cita>()
-                .HasOne<Doctor>().WithMany()
+                .HasOne<Paciente>().WithMany()
                 .HasForeignKey( c => c.IdPaciente );
 
             modelBuilder.Entity<DetalleProducto>()
@@ -42,6 +43,22 @@ namespace DAL
             modelBuilder.Entity<Informe>()
                 .HasOne<Doctor>().WithMany()
                 .HasForeignKey( I => I.IdDoctor );
+
+            modelBuilder.Entity<Especialidad>()
+                .HasData(LlenarEspecialidades());
+        }
+
+
+        public List<Especialidad> LlenarEspecialidades()
+        {
+            List<Especialidad> especialidades = new List<Especialidad>();
+            especialidades.Add(new Especialidad(){Nombre = "Odontólogo general", Codigo = "123"});
+            especialidades.Add(new Especialidad(){ Nombre = "Odontopediatra", Codigo = "1234"});
+            especialidades.Add(new Especialidad(){ Nombre = "Periodoncista", Codigo = "1235"});
+            especialidades.Add(new Especialidad(){ Nombre = "Endodoncista", Codigo = "1236"});
+            especialidades.Add(new Especialidad(){ Nombre = "Cirujano Oral", Codigo = "1237"});
+            especialidades.Add(new Especialidad(){ Nombre = "Prostodoncista", Codigo = "1238"});
+            return especialidades;
         }
     }
 }

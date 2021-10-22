@@ -19,7 +19,7 @@ namespace proyectoF.Models
         public string DepartamentoResidencia { get; set; }
         public string Email { get; set; }
         public string Codigo { get; set; }
-        public EspecialidadViewModels Especialidad { get; set; }
+        public EspecialidadInputModels Especialidad { get; set; }
     }
 
     public class PersonaViewModel : PersonaInputModels

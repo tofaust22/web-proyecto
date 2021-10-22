@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -28,6 +28,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { EspecialidadRegistroComponent } from './Especialidad/especialidad-registro/especialidad-registro.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductoRegistroComponent } from './producto/producto-registro/producto-registro.component';
+import {MatStepperModule} from '@angular/material/stepper';
   
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ProductoRegistroComponent } from './producto/producto-registro/producto
     ListaReciboComponent,
     CrearReciboComponent,
     EspecialidadRegistroComponent,
-    ProductoRegistroComponent
+    ProductoRegistroComponent,
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,8 +60,10 @@ import { ProductoRegistroComponent } from './producto/producto-registro/producto
     MatSelectModule,
     MatCardModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatStepperModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

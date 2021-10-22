@@ -6,6 +6,7 @@ namespace Entity
 {
     public class Cita
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Codigo { get; set; }
         public DateTime FechaRegistro { get; set; }
@@ -15,14 +16,13 @@ namespace Entity
         public Doctor Doctor { get; set; }
         [NotMapped]
         public Paciente Paciente { get; set; }
-        public string IdDoctor { get; set; }
         public string IdPaciente { get; set; }
+        public string CodigoAgenda { get; set; }
 
 
         public void AgregarDoctor(Doctor doctor)
         {
             Doctor = doctor;
-            IdDoctor = doctor.Identificacion;
         }
 
         public void AgregarPaciente(Paciente paciente)
