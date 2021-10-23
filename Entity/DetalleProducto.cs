@@ -13,6 +13,7 @@ namespace Entity
         public DateTime Fecha { get; set; }
         [NotMapped]
         public Producto Producto { get; set; }
+        [Column(TypeName = "decimal")]
         public decimal Valor { get; set; }
         public string IdProducto { get; set; }
 

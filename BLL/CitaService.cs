@@ -88,5 +88,32 @@ namespace BLL
             }
         }
 
+        public ResponseClassGeneric<Cita> BuscarCitasDoctor(string identificacion)
+        {
+            try
+            {
+                Doctor doctor = _context.Doctores.Include( d => d.Agenda)
+                .Where( d => d.Identificacion == identificacion).FirstOrDefault();
+
+                doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
+
+                var citas = _context.Citas
+                .Where( c => c.CodigoAgenda == doctor.Agenda.Codigo && c.FechaRegistro > DateTime.Now )
+                .OrderBy(f => f.FechaRegistro).ToList();
+                
+                foreach (var item in citas)
+                {
+                    item.Doctor = doctor;
+                    item.Paciente = _context.Pacientes.Find(item.IdPaciente);
+                };
+                
+                return new ResponseClassGeneric<Cita>(citas);
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Cita>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
+
     }
 }

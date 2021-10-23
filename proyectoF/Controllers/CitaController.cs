@@ -3,6 +3,7 @@ using Entity;
 using DAL;
 using BLL;
 using proyectoF.Models;
+using System.Linq;
 
 namespace proyectoF.Controllers
 {
@@ -29,12 +30,23 @@ namespace proyectoF.Controllers
             return Ok(new CitaViewModels(response.Object));
         }
 
+        [HttpGet("Doctor/{identificacion}")]
+        public ActionResult<CitaViewModels> BuscarCitaDoctores(string identificacion)
+        {
+            var response = _service.BuscarCitasDoctor(identificacion);
+            if(response.Error)
+            {
+                return BadRequest(response.Mensaje);
+            }
+            return Ok(response.Objects.Select( c => new CitaViewModels(c)));
+        }
+
 
         private Cita MapearCita(CitaInputModels citaInput)
         {
             var cita = new Cita()
             {
-                Estado = citaInput.Estado,
+                Estado = true,
                 FechaRegistro = citaInput.FechaRegistro,
                 Observaciones = citaInput.Observaciones
             };

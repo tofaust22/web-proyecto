@@ -22,4 +22,11 @@ export class CitaService {
       catchError(this.handleError.handleError<Cita>('registro cita', null))
     )
   }
+
+  citasDoctor(id: string): Observable<Cita[]> {
+    return this.http.get<Cita[]>(this.baseUrl + 'api/Cita/Doctor/'+id).pipe(
+      tap( _ =>  this.handleError.log('datos enviados')),
+      catchError(this.handleError.handleError<Cita[]>('registro cita', null))
+    )
+  }
 }

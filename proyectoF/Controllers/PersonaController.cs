@@ -54,6 +54,13 @@ namespace proyectoF.Controllers
             return ResponseHttpPaciente(response, false);
         }
 
+        [HttpGet("Doctor/{id}")]
+        public ActionResult<PersonaViewModel> BuscarDoctor(string id)
+        {
+            var response = _service.BuscarDoctor(id);
+            return ResponseHttpDoctor(response, false);
+        }
+
         [HttpPut("Doctor")]
         public ActionResult<PersonaViewModel> ModificarDoctor(PersonaInputModels personaInput)
         {

@@ -32,6 +32,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { CitaRegistroComponent } from './cita/cita-registro/cita-registro.component';
 import { DoctorRegistroComponent } from './doctor/doctor-registro/doctor-registro.component';
 import { DoctorConsultarComponent } from './doctor/doctor-consultar/doctor-consultar.component';
+import { ListaCitasComponent } from './cita/lista-citas/lista-citas.component';
   
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { DoctorConsultarComponent } from './doctor/doctor-consultar/doctor-consu
     CitaRegistroComponent,
     DoctorRegistroComponent,
     DoctorConsultarComponent,
+    ListaCitasComponent,
     
   ],
   imports: [

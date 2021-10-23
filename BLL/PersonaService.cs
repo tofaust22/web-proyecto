@@ -170,5 +170,23 @@ namespace BLL
                 return new ResponseClassGeneric<Paciente>($"Error en la Aplicacion: {e.Message}");
             }
         }
+        public ResponseClassGeneric<Doctor> BuscarDoctor(string id)
+        {
+            try
+            {
+                var response =_context.Doctores.Include( d => d.Agenda)
+                .Where( d=> d.Identificacion == id).FirstOrDefault();
+                if(response is null)
+                {
+                    return new ResponseClassGeneric<Doctor>("No existe el doctor");
+                }
+                response.Especialidad = _context.Especialidades.Find(response.IdEspecialidad);
+                return new ResponseClassGeneric<Doctor>(response);
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Doctor>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
     }
 }

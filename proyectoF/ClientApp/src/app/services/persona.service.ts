@@ -38,6 +38,13 @@ export class PersonaService {
     )
   }
 
+  buscarDoctor(id: string): Observable<Doctor> {
+    return this.http.get<Doctor>(this.baseUrl + 'api/Persona/Doctor/' +id).pipe(
+      tap( _ =>  this.handleError.log('datos enviados')),
+      catchError(this.handleError.handleError<Doctor>('consulta doctor', null))
+    )
+  }
+
   consultarDoctores(): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(this.baseUrl + 'api/Persona/Doctores').pipe(
       tap( _ =>  this.handleError.log('datos enviados')),
