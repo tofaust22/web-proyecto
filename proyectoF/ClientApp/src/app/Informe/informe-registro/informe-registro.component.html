@@ -1,0 +1,33 @@
+<div class="content">
+    
+    <h1>Informe Cita</h1>
+
+    <form class="example-form">
+        <mat-grid-list gutterSize="20px" cols="1" rowHeight="110px">
+            <mat-grid-tile >
+                <div>
+                    
+                    <h2>Paciente: {{cita.paciente.primerNombre}} {{cita.paciente.primerApellido}}</h2>
+                    <h3>observaciones: {{cita.observaciones}}</h3>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                    <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Diagnostico</mat-label>
+                    <textarea matInput></textarea>
+                    </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile >
+                <div>
+                    <button  mat-raised-button color="primary">Guardar</button>
+                </div>
+                <div style="padding-left: 3%;">
+                    <button mat-raised-button color="warn"> Cancelar </button>
+                </div>
+            </mat-grid-tile>
+
+        
+        </mat-grid-list>
+    </form>
+</div>

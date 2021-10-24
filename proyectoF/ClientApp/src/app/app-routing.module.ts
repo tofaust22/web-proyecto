@@ -14,6 +14,7 @@ import { ListaReciboComponent } from './recibos/lista-recibo/lista-recibo.compon
 import { CitaRegistroComponent } from './cita/cita-registro/cita-registro.component';
 import { DoctorConsultarComponent } from './doctor/doctor-consultar/doctor-consultar.component';
 import { ListaCitasComponent } from './cita/lista-citas/lista-citas.component';
+import { InformeRegistroComponent } from './Informe/informe-registro/informe-registro.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'registro-doctor', component: DoctorRegistroComponent },
   { path: 'registro-cita', component:  CitaRegistroComponent},
   { path: 'consulta-doctores', component: DoctorConsultarComponent},
-  { path: 'lista-citas/:id', component: ListaCitasComponent}
+  { path: 'lista-citas/:id', component: ListaCitasComponent},
+  { path: 'informe/:codigo/:idDoctor', component: InformeRegistroComponent}
 ];
 
 @NgModule({

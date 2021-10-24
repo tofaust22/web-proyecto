@@ -67,7 +67,7 @@ namespace BLL
         {
             try
             {
-                return new ResponseClassGeneric<Cita>(_context.Citas.Where(c => c.Estado == true && c.FechaRegistro > DateTime.Now).ToList());
+                return new ResponseClassGeneric<Cita>(_context.Citas.Where(c => c.Estado == "Activo" && c.FechaRegistro > DateTime.Now).ToList());
             }
             catch(Exception e)
             {
@@ -75,12 +75,18 @@ namespace BLL
             }
         }
 
-        public ResponseClassGeneric<Cita> BuscarCita(string codigo)
+        public ResponseClassGeneric<Cita> BuscarCita(string codigo, string idDoctor)
         {
             try
             {
-                return new ResponseClassGeneric<Cita>(_context.Citas.Where( c => c.Codigo == codigo && c.Estado == true )
-                                                        .FirstOrDefault());
+                var cita = _context.Citas.Where( c => c.Codigo == codigo && c.Estado == "Atendiendo" )
+                                                        .FirstOrDefault();
+                var doctor = _context.Doctores.Include( d => d.Agenda)
+                                .Where( d => d.Identificacion == idDoctor).FirstOrDefault();
+                doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
+                cita.Doctor = doctor;
+                cita.Paciente = _context.Pacientes.Find(cita.IdPaciente);
+                return new ResponseClassGeneric<Cita>(cita);
             }
             catch(Exception e)
             {
@@ -108,6 +114,33 @@ namespace BLL
                 };
                 
                 return new ResponseClassGeneric<Cita>(citas);
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Cita>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
+
+        public ResponseClassGeneric<Cita> AtenderCita(string codigo, string idDoctor)
+        {
+            try
+            {
+                var cita = _context.Citas
+                    .Where( c => c.Codigo == codigo && c.Estado == "Activa" && c.FechaRegistro > DateTime.Now )
+                    .FirstOrDefault();
+                if(cita is null)
+                {
+                    return new ResponseClassGeneric<Cita>("No existe la cita");
+                }
+                cita.Estado = "Atendiendo";
+                _context.Citas.Update(cita);
+                _context.SaveChanges();
+                var doctor = _context.Doctores.Include( d => d.Agenda)
+                                .Where( d => d.Identificacion == idDoctor).FirstOrDefault();
+                doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
+                cita.Doctor = doctor;
+                cita.Paciente = _context.Pacientes.Find(cita.IdPaciente);
+                return new ResponseClassGeneric<Cita>(cita);
             }
             catch(Exception e)
             {

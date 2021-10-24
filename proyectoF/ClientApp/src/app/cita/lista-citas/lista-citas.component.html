@@ -29,16 +29,14 @@
                     <tr *ngFor="let cita of citas">
                         <td>{{ cita.fechaRegistro | date:'short' }}</td>
                         <td> {{cita.observaciones}}</td>
-                        <td *ngIf="cita.estado; else cancel">
-                            Activa
+                        <td>
+                            {{cita.estado}}
                         </td>
-                        <ng-template #cancel>
-                            <td>Cancelada</td>
-                        </ng-template>
+                        
                         <td>
                             <div class="text-center">
                              <div class="btn-group">
-                                <button class="btn btn-success btnEditar">Atender</button>
+                                <button (click)="atenderCita(cita)" class="btn btn-success btnEditar">Atender</button>
                                  <button class="btn btn-primary btnEditar">Editar</button>
                              </div>
                             </div>

@@ -4,7 +4,7 @@ import { Paciente } from "./paciente";
 export class Cita {
     codigo: string;
     fechaRegistro: Date;
-    estado: boolean
+    estado: string
     observaciones: string
     doctor: Doctor;
     paciente: Paciente;

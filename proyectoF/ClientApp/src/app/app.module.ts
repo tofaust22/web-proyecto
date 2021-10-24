@@ -33,6 +33,7 @@ import { CitaRegistroComponent } from './cita/cita-registro/cita-registro.compon
 import { DoctorRegistroComponent } from './doctor/doctor-registro/doctor-registro.component';
 import { DoctorConsultarComponent } from './doctor/doctor-consultar/doctor-consultar.component';
 import { ListaCitasComponent } from './cita/lista-citas/lista-citas.component';
+import { InformeRegistroComponent } from './Informe/informe-registro/informe-registro.component';
   
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ListaCitasComponent } from './cita/lista-citas/lista-citas.component';
     DoctorRegistroComponent,
     DoctorConsultarComponent,
     ListaCitasComponent,
+    InformeRegistroComponent,
     
   ],
   imports: [

@@ -17,11 +17,19 @@ namespace Entity
         [NotMapped]
         public DetalleProducto Detalle { get; set; }
         public string Diagnostico { get; set; }
+        [NotMapped]
+        public Cita Cita { get; set; }
+        public string IdCita { get; set; }
 
         public void AgregarDoctor(Doctor doctor)
         {
             Doctor = doctor;
             Doctor.Identificacion = doctor.Identificacion;
+        }
+        public void AgregarCita(Cita cita)
+        {
+            Cita = cita;
+            IdCita = cita.Codigo;
         }
 
         public void CrearDetalle(Producto producto, int cantidad, DateTime fecha)

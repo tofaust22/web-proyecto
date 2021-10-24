@@ -7,7 +7,7 @@ namespace proyectoF.Models
     {
         public string Codigo { get; set; }
         public DateTime FechaRegistro { get; set; }
-        public bool Estado { get; set; }
+        public string Estado { get; set; }
         public string Observaciones { get; set; }
         public PersonaInputModels Doctor { get; set; }
         public PersonaInputModels Paciente { get; set; }

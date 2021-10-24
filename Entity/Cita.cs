@@ -10,7 +10,7 @@ namespace Entity
         [Key]
         public string Codigo { get; set; }
         public DateTime FechaRegistro { get; set; }
-        public bool Estado { get; set; }
+        public string Estado { get; set; }
         public string Observaciones { get; set; }
         [NotMapped]
         public Doctor Doctor { get; set; }

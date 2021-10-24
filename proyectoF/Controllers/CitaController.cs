@@ -41,12 +41,34 @@ namespace proyectoF.Controllers
             return Ok(response.Objects.Select( c => new CitaViewModels(c)));
         }
 
+        [HttpPut("Doctor")]
+        public ActionResult<CitaViewModels> AtenderCita(CitaInputModels citaInput)
+        {
+            var response = _service.AtenderCita(citaInput.Codigo, citaInput.Doctor.Identificacion);
+            if(response.Error)
+            {
+                return BadRequest(response.Mensaje);
+            }
+            return Ok(new CitaViewModels(response.Object));
+        }
+
+        [HttpGet("Doctor/Buscar/{codigo}/{idDoctor}")]
+        public ActionResult<CitaViewModels> BuscarCita(string codigo, string idDoctor)
+        {
+            var response = _service.BuscarCita(codigo, idDoctor);
+            if(response.Error)
+            {
+                return BadRequest(response.Mensaje);
+            }
+            return Ok(new CitaViewModels(response.Object));
+        }
+
 
         private Cita MapearCita(CitaInputModels citaInput)
         {
             var cita = new Cita()
             {
-                Estado = true,
+                Estado = "Activa",
                 FechaRegistro = citaInput.FechaRegistro,
                 Observaciones = citaInput.Observaciones
             };

@@ -43,6 +43,10 @@ namespace DAL
             modelBuilder.Entity<Informe>()
                 .HasOne<Doctor>().WithMany()
                 .HasForeignKey( I => I.IdDoctor );
+            
+            modelBuilder.Entity<Informe>()
+                .HasOne<Cita>().WithMany()
+                .HasForeignKey( I => I.IdCita );
 
             modelBuilder.Entity<Especialidad>()
                 .HasData(LlenarEspecialidades());
