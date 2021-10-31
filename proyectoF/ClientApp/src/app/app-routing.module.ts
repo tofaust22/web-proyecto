@@ -15,6 +15,7 @@ import { CitaRegistroComponent } from './cita/cita-registro/cita-registro.compon
 import { DoctorConsultarComponent } from './doctor/doctor-consultar/doctor-consultar.component';
 import { ListaCitasComponent } from './cita/lista-citas/lista-citas.component';
 import { InformeRegistroComponent } from './Informe/informe-registro/informe-registro.component';
+import { ProductoConsultaComponent } from './producto/producto-consulta/producto-consulta.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'registro-cita', component:  CitaRegistroComponent},
   { path: 'consulta-doctores', component: DoctorConsultarComponent},
   { path: 'lista-citas/:id', component: ListaCitasComponent},
-  { path: 'informe/:codigo/:idDoctor', component: InformeRegistroComponent}
+  { path: 'informe/:codigo/:idDoctor', component: InformeRegistroComponent},
+  {path: 'productosLista', component: ProductoConsultaComponent}
 ];
 
 @NgModule({

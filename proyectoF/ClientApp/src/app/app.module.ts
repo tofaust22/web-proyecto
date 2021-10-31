@@ -34,7 +34,11 @@ import { DoctorRegistroComponent } from './doctor/doctor-registro/doctor-registr
 import { DoctorConsultarComponent } from './doctor/doctor-consultar/doctor-consultar.component';
 import { ListaCitasComponent } from './cita/lista-citas/lista-citas.component';
 import { InformeRegistroComponent } from './Informe/informe-registro/informe-registro.component';
-  
+import { ProductoConsultaComponent } from './producto/producto-consulta/producto-consulta.component';
+
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogProductoComponent } from './producto/dialog-producto/dialog-producto.component';
+import { DialogNotFoundComponent } from './dialog-not-found/dialog-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +59,9 @@ import { InformeRegistroComponent } from './Informe/informe-registro/informe-reg
     DoctorConsultarComponent,
     ListaCitasComponent,
     InformeRegistroComponent,
+    ProductoConsultaComponent,
+    DialogProductoComponent,
+    DialogNotFoundComponent,
     
   ],
   imports: [
@@ -71,7 +78,8 @@ import { InformeRegistroComponent } from './Informe/informe-registro/informe-reg
     MatCardModule,
     MatButtonModule,
     AppRoutingModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

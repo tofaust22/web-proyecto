@@ -22,4 +22,18 @@ export class ProductoService {
       catchError(this.handleError.handleError<Producto>('registro producto', null))
     )
   }
+
+  Get(): Observable<Producto[]> {
+    return this.http.get<Producto[]>(this.baseUrl + 'api/Producto').pipe(
+      tap( _ =>  this.handleError.log('datos enviados')),
+      catchError(this.handleError.handleError<Producto[]>('consultar productos', null))
+    )
+  }
+
+  search(id: string): Observable<Producto> {
+    return this.http.get<Producto>(this.baseUrl + 'api/Producto/'+id).pipe(
+      tap( _ =>  this.handleError.log('datos enviados')),
+      catchError(this.handleError.handleError<Producto>('consultar producto', null))
+    )
+  }
 }
