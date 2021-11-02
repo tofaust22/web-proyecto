@@ -82,7 +82,7 @@ namespace BLL
             }
         }
 
-        public ResponseClassGeneric<Paciente> RegistrarInforme(Informe informe, string identificacion)
+        public ResponseClassGeneric<Informe> RegistrarInforme(Informe informe, string identificacion)
         {
             try
             {
@@ -90,17 +90,17 @@ namespace BLL
                                                 .Where( p => p.Identificacion == identificacion).FirstOrDefault();
                 if(response is null)
                 {
-                    return new ResponseClassGeneric<Paciente>("No existe el paciente");
+                    return new ResponseClassGeneric<Informe>("No existe el paciente");
                 }
                 response.Historia.AgregarInforme(informe);
                 _context.Pacientes.Update(response);
                 _context.SaveChanges();
-                return new ResponseClassGeneric<Paciente>(response);
+                return new ResponseClassGeneric<Informe>(informe);
 
             }
             catch(Exception e)
             {
-                return new ResponseClassGeneric<Paciente>($"Error en la Aplicacion: {e.Message}");
+                return new ResponseClassGeneric<Informe>($"Error en la Aplicacion: {e.Message}");
             }
         }
 

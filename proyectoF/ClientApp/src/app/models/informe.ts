@@ -1,11 +1,14 @@
 import { Cita } from "./cita";
 import { Doctor } from "./doctor";
+import { Producto } from "./producto";
 
 export class Informe {
     codigo: string;
-    //public List<DetalleProducto> Detalles { get; set; }
+    productos: Producto[];
     doctor: Doctor;
-    //public DetalleProducto Detalle { get; set; }
+    idDoctor: string;
+    idPaciente: string;
     diagnostico: string;
+    estado: boolean;
     cita: Cita;
 }

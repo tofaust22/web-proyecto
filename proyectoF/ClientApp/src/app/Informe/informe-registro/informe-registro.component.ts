@@ -7,6 +7,8 @@ import { CitaService } from 'src/app/services/cita.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ProductoService } from 'src/app/services/producto.service';
 import { DialogNotFoundComponent } from 'src/app/dialog-not-found/dialog-not-found.component';
+import { Informe } from 'src/app/models/informe';
+import { InformeService } from 'src/app/services/informe.service';
 
 @Component({
   selector: 'app-informe-registro',
@@ -15,12 +17,13 @@ import { DialogNotFoundComponent } from 'src/app/dialog-not-found/dialog-not-fou
 })
 export class InformeRegistroComponent implements OnInit {
   cita: Cita;
-  informe: string;
+  informe: Informe;
   productos: Producto[];
   productosConsulta: Producto[];
   product: Producto;
   constructor(private routeActive: ActivatedRoute, private serviceCita: CitaService,
-                public dialog: MatDialog,public dialog2: MatDialog, private serviceProducto: ProductoService) { }
+                public dialog: MatDialog,public dialog2: MatDialog, private serviceProducto: ProductoService,
+                private serviceInforme: InformeService) { }
 
   ngOnInit(): void {
     this.cita = new Cita();
@@ -31,6 +34,7 @@ export class InformeRegistroComponent implements OnInit {
     const doctor = this.routeActive.snapshot.params.idDoctor;
     this.datosCita(codigo, doctor);
     this.getProductos();
+    this.informe = new Informe();
   }
 
   datosCita(codigo: string, doctor: string ){
@@ -58,7 +62,7 @@ export class InformeRegistroComponent implements OnInit {
           var cantidad = this.productos[index].cantidad + result.cantidad;
           if(this.product != undefined){
             if(cantidad > this.product.cantidad){
-              this.openDialogNotFound('Cantidad Insuficiente');
+              this.openDialogNotFound('Error: Cantidad Insuficiente', '');
             }
             else{
               this.productos[index].cantidad += result.cantidad;
@@ -71,7 +75,7 @@ export class InformeRegistroComponent implements OnInit {
         this.getProducto(result.codigo);
         if(this.product != undefined){
           if(result.cantidad > this.product.cantidad){
-              this.openDialogNotFound('Cantidad Insuficiente');
+              this.openDialogNotFound('Error: Cantidad Insuficiente', '');
           }
           else{
             this.productos.push(result);
@@ -100,16 +104,29 @@ export class InformeRegistroComponent implements OnInit {
     })
   }
 
-  openDialogNotFound(mensaje: string){
+  openDialogNotFound(mensaje: string, codigo: string){
     const dialogRef = this.dialog2.open(DialogNotFoundComponent, {
       width: '250px',
-      data: mensaje
+      data: {'mensaje' : mensaje, 'codigo' : codigo}
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
     });
 
+  }
+
+  guardarInforme(){
+    this.informe.productos = this.productos;
+    this.informe.idDoctor = this.cita.doctor.identificacion;
+    this.informe.idPaciente = this.cita.paciente.identificacion;
+    this.informe.cita = this.cita;
+    
+     this.serviceInforme.post(this.informe).subscribe(result => {
+      if(result != null){
+        this.openDialogNotFound('Reclamar Medicamentos', 'Codigo: ' + result.codigo);
+      }
+     })
   }
 
 }

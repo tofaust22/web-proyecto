@@ -50,13 +50,15 @@
                 <mat-grid-tile >
                         <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Diagnostico</mat-label>
-                        <textarea matInput></textarea>
+                        <textarea [(ngModel)]="informe.diagnostico"
+                        name="diagnostico" id="diagnostico"
+                        matInput></textarea>
                         </mat-form-field>
                 </mat-grid-tile>
             
                 <mat-grid-tile >
                     <div>
-                        <button  mat-raised-button color="primary">Guardar</button>
+                        <button (click)="guardarInforme()"  mat-raised-button color="primary">Guardar</button>
                     </div>
                     <div style="padding-left: 3%;">
                         <button mat-raised-button color="warn"> Cancelar </button>

@@ -20,6 +20,7 @@ namespace Entity
         [NotMapped]
         public Cita Cita { get; set; }
         public string IdCita { get; set; }
+        public bool Estado { get; set; }
 
         public void AgregarDoctor(Doctor doctor)
         {

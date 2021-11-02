@@ -10,6 +10,7 @@ namespace proyectoF.Models
         public string IdDoctor { get; set; }
         public string Diagnostico { get; set; }
         public string IdPaciente { get; set; }
+        public bool Estado { get; set; }
         public CitaInputModels Cita { get; set; }
     }
 
@@ -19,6 +20,7 @@ namespace proyectoF.Models
         {
             Diagnostico = informe.Diagnostico;
             Codigo = informe.Codigo;
+            Estado = informe.Estado;
         }
 
         public string Codigo { get; set; }

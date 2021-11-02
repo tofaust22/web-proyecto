@@ -27,7 +27,7 @@ namespace proyectoF.Controllers
             {
                 return BadRequest(response.Mensaje);
             }
-            return Ok(new PersonaViewModel(response.Object));
+            return Ok(new InformeViewsModels(response.Object));
         }
 
         private Informe MapearInforme(InformeInputModels informeInput)
@@ -39,6 +39,7 @@ namespace proyectoF.Controllers
 
             informe.IdDoctor = informeInput.IdDoctor;
             informe.IdCita = informeInput.Cita.Codigo;
+            informe.Estado = false;
             informeInput.Productos.ForEach(p => {
                 informe.CrearDetalle(MapearProducto(p), p.Cantidad, DateTime.Now);
             });
