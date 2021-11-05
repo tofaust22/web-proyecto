@@ -1,4 +1,6 @@
+using System.Text;
 using DAL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using proyectoF.Config;
 
 namespace proyectoF
 {
@@ -24,6 +28,37 @@ namespace proyectoF
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            #region    configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSetting");
+            services.Configure<AppSetting>(appSettingsSection);
+            #endregion
+
+            #region Configure jwt authentication inteprete el token 
+            var appSettings = appSettingsSection.Get<AppSetting>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            services.AddControllers();
+            services.AddCors();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            #endregion
             // In production, the Angular files will be served from this directory
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ProyectoContext>(p => p.UseSqlServer(connectionString));

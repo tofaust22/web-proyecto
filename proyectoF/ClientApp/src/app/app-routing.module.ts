@@ -16,6 +16,7 @@ import { DoctorConsultarComponent } from './doctor/doctor-consultar/doctor-consu
 import { ListaCitasComponent } from './cita/lista-citas/lista-citas.component';
 import { InformeRegistroComponent } from './Informe/informe-registro/informe-registro.component';
 import { ProductoConsultaComponent } from './producto/producto-consulta/producto-consulta.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'consulta-doctores', component: DoctorConsultarComponent},
   { path: 'lista-citas/:id', component: ListaCitasComponent},
   { path: 'informe/:codigo/:idDoctor', component: InformeRegistroComponent},
-  {path: 'productosLista', component: ProductoConsultaComponent}
+  { path: 'productosLista', component: ProductoConsultaComponent},
+  { path: 'login', component: LoginComponent} 
 ];
 
 @NgModule({

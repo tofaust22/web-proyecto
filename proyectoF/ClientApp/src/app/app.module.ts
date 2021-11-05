@@ -39,6 +39,7 @@ import { ProductoConsultaComponent } from './producto/producto-consulta/producto
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogProductoComponent } from './producto/dialog-producto/dialog-producto.component';
 import { DialogNotFoundComponent } from './dialog-not-found/dialog-not-found.component';
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { DialogNotFoundComponent } from './dialog-not-found/dialog-not-found.com
     ProductoConsultaComponent,
     DialogProductoComponent,
     DialogNotFoundComponent,
+    LoginComponent,
     
   ],
   imports: [

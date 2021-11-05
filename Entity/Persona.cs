@@ -12,6 +12,7 @@ namespace Entity
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
         public DateTime FechaNacimiento { get; set; }
+        public Usuario Usuario { get; set; }
         public int Edad { get; set; }
 
         public void CalcularEdad()

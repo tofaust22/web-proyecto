@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ProyectoContext))]
-    partial class ProyectoContextModelSnapshot : ModelSnapshot
+    [Migration("20211105042230_Users2")]
+    partial class Users2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,7 +197,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Codigo");
 
-                    b.ToTable("Permisos");
+                    b.ToTable("Permiso");
                 });
 
             modelBuilder.Entity("Entity.PermisoRol", b =>
@@ -215,7 +217,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("RolId");
 
-                    b.ToTable("PermisoRoles");
+                    b.ToTable("PermisoRol");
                 });
 
             modelBuilder.Entity("Entity.Persona", b =>
@@ -290,7 +292,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Codigo");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Rol");
 
                     b.HasData(
                         new
@@ -332,7 +334,7 @@ namespace DAL.Migrations
 
                     b.HasKey("User");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuario");
 
                     b.HasData(
                         new
@@ -360,7 +362,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("UsuarioRoles");
+                    b.ToTable("UsuarioRol");
 
                     b.HasData(
                         new
