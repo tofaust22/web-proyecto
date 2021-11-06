@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ProyectoContext))]
-    partial class ProyectoContextModelSnapshot : ModelSnapshot
+    [Migration("20211106193937_menuh1")]
+    partial class menuh1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,21 +206,6 @@ namespace DAL.Migrations
                         {
                             Codigo = "2",
                             Nombre = "Doctor"
-                        },
-                        new
-                        {
-                            Codigo = "3",
-                            Nombre = "Paciente"
-                        },
-                        new
-                        {
-                            Codigo = "4",
-                            Nombre = "Producto"
-                        },
-                        new
-                        {
-                            Codigo = "5",
-                            Nombre = "Cita"
                         });
                 });
 
@@ -266,36 +253,6 @@ namespace DAL.Migrations
                             Codigo = "4",
                             Descripcion = "Consultar Doctores",
                             IdPrograma = "4"
-                        },
-                        new
-                        {
-                            Codigo = "5",
-                            Descripcion = "Registro Paciente",
-                            IdPrograma = "5"
-                        },
-                        new
-                        {
-                            Codigo = "6",
-                            Descripcion = "Consulta de pacientes",
-                            IdPrograma = "6"
-                        },
-                        new
-                        {
-                            Codigo = "7",
-                            Descripcion = "Registro de productos",
-                            IdPrograma = "7"
-                        },
-                        new
-                        {
-                            Codigo = "8",
-                            Descripcion = "Consulta de productos",
-                            IdPrograma = "8"
-                        },
-                        new
-                        {
-                            Codigo = "9",
-                            Descripcion = "Registro de citas medicas",
-                            IdPrograma = "9"
                         });
                 });
 
@@ -342,48 +299,6 @@ namespace DAL.Migrations
                             Codigo = "4",
                             PermisoId = "4",
                             RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "5",
-                            PermisoId = "5",
-                            RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "6",
-                            PermisoId = "6",
-                            RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "7",
-                            PermisoId = "7",
-                            RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "8",
-                            PermisoId = "8",
-                            RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "9",
-                            PermisoId = "9",
-                            RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "10",
-                            PermisoId = "8",
-                            RolId = "2"
-                        },
-                        new
-                        {
-                            Codigo = "11",
-                            PermisoId = "9",
-                            RolId = "3"
                         });
                 });
 
@@ -497,41 +412,6 @@ namespace DAL.Migrations
                             IdModulo = "2",
                             Nombre = "Consultar Doctores",
                             Ruta = "/consulta-doctores"
-                        },
-                        new
-                        {
-                            Codigo = "5",
-                            IdModulo = "3",
-                            Nombre = "Registro Paciente",
-                            Ruta = "/registro-pacientes"
-                        },
-                        new
-                        {
-                            Codigo = "6",
-                            IdModulo = "3",
-                            Nombre = "Consultar Pacientes",
-                            Ruta = "/lista-pacientes"
-                        },
-                        new
-                        {
-                            Codigo = "7",
-                            IdModulo = "4",
-                            Nombre = "Registrar Producto",
-                            Ruta = "/registro-productos"
-                        },
-                        new
-                        {
-                            Codigo = "8",
-                            IdModulo = "4",
-                            Nombre = "Consultar Productos",
-                            Ruta = "/productosLista"
-                        },
-                        new
-                        {
-                            Codigo = "9",
-                            IdModulo = "5",
-                            Nombre = "Registrar Cita",
-                            Ruta = "/registro-cita"
                         });
                 });
 
@@ -601,7 +481,6 @@ namespace DAL.Migrations
             modelBuilder.Entity("Entity.UsuarioRol", b =>
                 {
                     b.Property<string>("Codigo")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("RolId")

@@ -150,6 +150,15 @@ namespace proyectoF.Controllers
             };
             paciente.CalcularEdad();
             paciente.CrearHistoria();
+            paciente.Usuario = new Usuario()
+            {
+                User = personaInput.Usuario.Usuario,
+                Password = personaInput.Usuario.Password,
+                Nombre = personaInput.Usuario.Nombre,
+                Apellidos = personaInput.Usuario.Apellidos,
+                Estado = "Activo",
+                
+            };
             return paciente;
         }
         

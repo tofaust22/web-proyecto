@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPasswordComponent } from 'src/app/dialog-password/dialog-password.component';
 import { Paciente } from 'src/app/models/paciente';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -10,18 +12,28 @@ import { PersonaService } from 'src/app/services/persona.service';
 export class RegistroPacientesComponent implements OnInit {
 
   paciente: Paciente;
-  constructor(private servicePersona: PersonaService) { }
+  constructor(private servicePersona: PersonaService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.paciente = new Paciente();
   }
 
   guardar(){
-    this.servicePersona.postPaciente(this.paciente).subscribe(result => {
-      if(result != null){
-        console.log(this.paciente);
-      }
-    })
+
+    const dialogRef = this.dialog.open(DialogPasswordComponent, {
+      width: '250px',
+      //data: {name: this.name, animal: this.animal},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      
+    });
+    // this.servicePersona.postPaciente(this.paciente).subscribe(result => {
+    //   if(result != null){
+    //     console.log(this.paciente);
+    //   }
+    // });
   }
 
 }

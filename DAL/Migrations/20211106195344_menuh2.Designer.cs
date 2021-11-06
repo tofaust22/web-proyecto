@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ProyectoContext))]
-    partial class ProyectoContextModelSnapshot : ModelSnapshot
+    [Migration("20211106195344_menuh2")]
+    partial class menuh2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,18 +374,6 @@ namespace DAL.Migrations
                             Codigo = "9",
                             PermisoId = "9",
                             RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "10",
-                            PermisoId = "8",
-                            RolId = "2"
-                        },
-                        new
-                        {
-                            Codigo = "11",
-                            PermisoId = "9",
-                            RolId = "3"
                         });
                 });
 
@@ -601,7 +591,6 @@ namespace DAL.Migrations
             modelBuilder.Entity("Entity.UsuarioRol", b =>
                 {
                     b.Property<string>("Codigo")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("RolId")

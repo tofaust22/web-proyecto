@@ -5,6 +5,7 @@ namespace Entity
 {
     public class UsuarioRol
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Codigo { get; set; }
         public string UsuarioId { get; set; }

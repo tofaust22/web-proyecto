@@ -128,6 +128,17 @@ namespace DAL
             permisoRols.Add(new PermisoRol(){ Codigo = "1" , PermisoId = "1", RolId = "1" });
             permisoRols.Add(new PermisoRol(){ Codigo = "2", PermisoId = "2", RolId = "1" });
             permisoRols.Add(new PermisoRol(){ Codigo = "3", PermisoId = "3", RolId = "1" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "4", PermisoId = "4", RolId = "1" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "5", PermisoId = "5", RolId = "1" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "6", PermisoId = "6", RolId = "1" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "7", PermisoId = "7", RolId = "1" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "8", PermisoId = "8", RolId = "1" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "9", PermisoId = "9", RolId = "1" });
+
+            //Rol Doctor
+            permisoRols.Add(new PermisoRol(){ Codigo = "10", PermisoId = "8", RolId = "2" });
+            //Rol Paciente
+            permisoRols.Add(new PermisoRol(){ Codigo = "11", PermisoId = "9", RolId = "3" });
             return permisoRols;
         }
 
@@ -137,15 +148,32 @@ namespace DAL
             permisos.Add(new Permiso(){ Codigo = "1", IdPrograma = "1", Descripcion = "Configuracion de permisos" });
             permisos.Add(new Permiso(){ Codigo = "2", IdPrograma = "2", Descripcion = "Crear Modulos del menu"});
             permisos.Add(new Permiso(){ Codigo = "3", IdPrograma = "3", Descripcion = "Registro de Doctores" });
+            permisos.Add(new Permiso(){ Codigo = "4", IdPrograma = "4", Descripcion = "Consultar Doctores" });
+            permisos.Add(new Permiso(){ Codigo = "5", IdPrograma = "5", Descripcion = "Registro Paciente" });
+            permisos.Add(new Permiso(){ Codigo = "6", IdPrograma = "6", Descripcion = "Consulta de pacientes" });
+            permisos.Add(new Permiso(){ Codigo = "7", IdPrograma = "7", Descripcion = "Registro de productos" });
+            permisos.Add(new Permiso(){ Codigo = "8", IdPrograma = "8", Descripcion = "Consulta de productos" });
+            permisos.Add(new Permiso(){ Codigo = "9", IdPrograma = "9", Descripcion = "Registro de citas medicas" });
             return permisos;
         }
 
         public List<ProgramaMenu> LlenarProgramas()
         {
             List<ProgramaMenu> programas = new List<ProgramaMenu>();
+            //configuracion
             programas.Add(new ProgramaMenu(){ Codigo = "1", Nombre = "Configurar Permisos" , Ruta = "/configurarPermisos", IdModulo = "1" });
             programas.Add(new ProgramaMenu(){ Codigo = "2", Nombre = "Crear Modulo" , Ruta = "/crearModulo", IdModulo = "1" });
+            //doctor
             programas.Add(new ProgramaMenu(){ Codigo = "3", Nombre = "Registro Doctor" ,Ruta = "/registro-doctor", IdModulo = "2" });
+            programas.Add(new ProgramaMenu(){ Codigo = "4", Nombre = "Consultar Doctores", Ruta = "/consulta-doctores", IdModulo = "2" });
+            //paciente
+            programas.Add(new ProgramaMenu(){ Codigo = "5", Nombre = "Registro Paciente", Ruta = "/registro-pacientes", IdModulo = "3" });
+            programas.Add(new ProgramaMenu(){ Codigo = "6", Nombre = "Consultar Pacientes", Ruta = "/lista-pacientes", IdModulo = "3" });
+            //producto
+            programas.Add(new ProgramaMenu(){ Codigo = "7", Nombre = "Registrar Producto", Ruta = "/registro-productos", IdModulo = "4" });
+            programas.Add(new ProgramaMenu(){ Codigo = "8", Nombre = "Consultar Productos", Ruta = "/productosLista", IdModulo = "4" });
+            //cita
+            programas.Add(new ProgramaMenu(){ Codigo = "9", Nombre = "Registrar Cita", Ruta = "/registro-cita", IdModulo = "5" });
             return programas;
         }
 
@@ -154,6 +182,9 @@ namespace DAL
             List<ModuleMenu> modulos = new List<ModuleMenu>();
             modulos.Add(new ModuleMenu(){ Codigo = "1", Nombre = "Configuracion" });
             modulos.Add(new ModuleMenu(){ Codigo = "2", Nombre = "Doctor" });
+            modulos.Add(new ModuleMenu(){ Codigo = "3", Nombre = "Paciente" });
+            modulos.Add(new ModuleMenu(){ Codigo = "4", Nombre = "Producto" });
+            modulos.Add(new ModuleMenu(){ Codigo = "5", Nombre = "Cita" });
             return modulos;
         }
 

@@ -7,64 +7,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        </li>
-        
-        <li class="nav-item dropdown">
-        
-          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            pacientes
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" [routerLink]="['/registro-pacientes']">nuevo paciente</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/lista-pacientes']">lista pacientes</a></li>
-            
-          </ul>
-        </li>
-
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            Producto
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" [routerLink]="['/registro-productos']">Registrar Producto</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/productosLista']">Consultar Productos</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            Cita
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" [routerLink]="['/registro-cita']">Registrar Cita</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/lista-gasto']">Consultar Citas</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            Doctor
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" [routerLink]="['/registro-doctor']">Registrar Doctor</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/consulta-doctores']">Consultar Doctores</a></li>
-            
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            recibos
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" [routerLink]="['/crear-recibo']">crear recibo</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/lista-recibo']">lista recibo</a></li>
-            
-          </ul>
-        </li>
-      </ul>
+     
     </div>
   </div>
 </nav>

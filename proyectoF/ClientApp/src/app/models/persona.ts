@@ -1,3 +1,5 @@
+import { Usuario } from "./usuario";
+
 export class Persona {
     identificacion: string;
     primerNombre: string;
@@ -5,6 +7,9 @@ export class Persona {
     primerApellido: string;
     segundoApellido: string;
     fechaNacimiento: Date;
+    usuario: Usuario;
 
-    constructor(){}
+    constructor(){
+        this.usuario = new Usuario();
+    }
 }

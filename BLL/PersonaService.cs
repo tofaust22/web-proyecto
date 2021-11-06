@@ -34,6 +34,10 @@ namespace BLL
             try
             {
                 _context.Personas.Add(paciente);
+                UsuarioRol usuarioRol = new UsuarioRol();
+                usuarioRol.RolId = "3";
+                usuarioRol.UsuarioId = paciente.Identificacion;
+                _context.UsuarioRoles.Add(usuarioRol);
                 _context.SaveChanges();
                 return new ResponseClassGeneric<Paciente>(paciente);
             }

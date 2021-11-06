@@ -6,7 +6,7 @@
 <ng-template #loginn>
   <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      <mat-accordion>
+      <mat-accordion class="example-headers-align">
         <div *ngFor="let modulo of usuario.modulos">
           <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header>
@@ -15,7 +15,7 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div *ngFor="let programa of modulo.programas">
-              <p style="padding-left: 5%;">{{programa.nombre}}</p>
+              <a [routerLink]="programa.ruta" style="padding-left: 4%;">{{programa.nombre}}</a>
             </div>
             
           </mat-expansion-panel>

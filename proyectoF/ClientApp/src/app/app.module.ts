@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -44,6 +44,7 @@ import { LoginComponent } from './login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { JwtInterceptor } from './services/jwt.interceptor';
+import { DialogPasswordComponent } from './dialog-password/dialog-password.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { JwtInterceptor } from './services/jwt.interceptor';
     DialogProductoComponent,
     DialogNotFoundComponent,
     LoginComponent,
+    DialogPasswordComponent,
     
   ],
   imports: [
@@ -89,7 +91,8 @@ import { JwtInterceptor } from './services/jwt.interceptor';
     MatDialogModule,
     MatSidenavModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ReactiveFormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
