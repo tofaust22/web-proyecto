@@ -23,5 +23,12 @@ namespace Entity
         public string Estado { get; set; }
         [NotMapped]
         public List<UsuarioRol> Roles { get; set; }
+        [NotMapped]
+        public List<ModuleMenu> Modulos { get; set; }
+
+        public Usuario()
+        {
+            Modulos = new List<ModuleMenu>();
+        }
     }
 }

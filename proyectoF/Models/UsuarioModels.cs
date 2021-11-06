@@ -32,7 +32,9 @@ namespace proyectoF.Models
             Nombre = usuario.Nombre;
             Apellidos = usuario.Apellidos;
             Roles = usuario.Roles;
+            Modulos = usuario.Modulos;
         }
+        public List<ModuleMenu> Modulos { get; set; }
         public List<UsuarioRol> Roles { get; set; }
     }
 }

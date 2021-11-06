@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { ListaGastoComponent } from './gastos/lista-gasto/lista-gasto.component'
 import { ListaReciboComponent } from './recibos/lista-recibo/lista-recibo.component';
 import { CrearReciboComponent } from './recibos/crear-recibo/crear-recibo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
@@ -40,6 +41,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogProductoComponent } from './producto/dialog-producto/dialog-producto.component';
 import { DialogNotFoundComponent } from './dialog-not-found/dialog-not-found.component';
 import { LoginComponent } from './login/login.component';
+import { MatIconModule } from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { JwtInterceptor } from './services/jwt.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,10 +86,13 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     AppRoutingModule,
     MatStepperModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatExpansionModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

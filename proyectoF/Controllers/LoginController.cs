@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using proyectoF.Config;
 using proyectoF.Servicios;
+using proyectoF.Models;
 
 namespace proyectoF.Controllers
 {
@@ -23,10 +24,10 @@ namespace proyectoF.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("{usuario}/{password}")]
-        public ActionResult Login(string usuario, string password)
+        [HttpPost()]
+        public ActionResult Login(UsuarioInputModels models)
         {
-            var user = _servicioLogin.ValidarUsuario(usuario, password);
+            var user = _servicioLogin.ValidarUsuario(models.Usuario, models.Password);
             if(user.Error)
             {
                 return Unauthorized(user.Mensaje);

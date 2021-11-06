@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ProyectoContext))]
-    partial class ProyectoContextModelSnapshot : ModelSnapshot
+    [Migration("20211105195932_menu2")]
+    partial class menu2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -199,11 +201,6 @@ namespace DAL.Migrations
                         {
                             Codigo = "1",
                             Nombre = "Configuracion"
-                        },
-                        new
-                        {
-                            Codigo = "2",
-                            Nombre = "Doctor"
                         });
                 });
 
@@ -233,18 +230,6 @@ namespace DAL.Migrations
                             Codigo = "1",
                             Descripcion = "Configuracion de permisos",
                             IdPrograma = "1"
-                        },
-                        new
-                        {
-                            Codigo = "2",
-                            Descripcion = "Crear Modulos del menu",
-                            IdPrograma = "2"
-                        },
-                        new
-                        {
-                            Codigo = "3",
-                            Descripcion = "Registro de Doctores",
-                            IdPrograma = "3"
                         });
                 });
 
@@ -272,18 +257,6 @@ namespace DAL.Migrations
                         {
                             Codigo = "1",
                             PermisoId = "1",
-                            RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "2",
-                            PermisoId = "2",
-                            RolId = "1"
-                        },
-                        new
-                        {
-                            Codigo = "3",
-                            PermisoId = "3",
                             RolId = "1"
                         });
                 });
@@ -361,9 +334,6 @@ namespace DAL.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ruta")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Codigo");
 
                     b.HasIndex("IdModulo");
@@ -375,22 +345,13 @@ namespace DAL.Migrations
                         {
                             Codigo = "1",
                             IdModulo = "1",
-                            Nombre = "Configurar Permisos",
-                            Ruta = "/configurarPermisos"
+                            Nombre = "/configurarPermisos"
                         },
                         new
                         {
                             Codigo = "2",
                             IdModulo = "1",
-                            Nombre = "Crear Modulo",
-                            Ruta = "/crearModulo"
-                        },
-                        new
-                        {
-                            Codigo = "3",
-                            IdModulo = "2",
-                            Nombre = "Registro Doctor",
-                            Ruta = "/registro-doctor"
+                            Nombre = "/crearModulo"
                         });
                 });
 

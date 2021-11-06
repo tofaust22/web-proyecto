@@ -21,6 +21,8 @@ namespace DAL
         public DbSet<Rol> Roles { get; set; }
         public DbSet<PermisoRol> PermisoRoles { get; set; }
         public DbSet<Permiso> Permisos { get; set; }
+        public DbSet<ProgramaMenu> Programas { get; set; }
+        public DbSet<ModuleMenu> Modulos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,6 +72,14 @@ namespace DAL
                 .HasOne<Rol>().WithMany()
                 .HasForeignKey( u => u.RolId );
 
+            modelBuilder.Entity<ProgramaMenu>()
+                .HasOne<ModuleMenu>().WithMany()
+                .HasForeignKey( m => m.IdModulo );
+            
+            modelBuilder.Entity<Permiso>()
+                .HasOne<ProgramaMenu>().WithMany()
+                .HasForeignKey( p => p.IdPrograma );
+
             modelBuilder.Entity<Especialidad>()
                 .HasData(LlenarEspecialidades());
 
@@ -81,6 +91,18 @@ namespace DAL
 
             modelBuilder.Entity<UsuarioRol>()
                 .HasData(AsignarRolAdmin());
+
+            modelBuilder.Entity<ModuleMenu>()
+                .HasData(LlenarMenu());
+
+            modelBuilder.Entity<ProgramaMenu>()
+                .HasData(LlenarProgramas());
+
+            modelBuilder.Entity<Permiso>()
+                .HasData(LlenarPermisos());
+
+            modelBuilder.Entity<PermisoRol>()
+                .HasData(LlenarPermisosRol());
         }
 
         public List<Rol> LlenarRoles()
@@ -97,6 +119,42 @@ namespace DAL
             List<UsuarioRol> usuRoles = new List<UsuarioRol>();
             usuRoles.Add( new UsuarioRol(){ Codigo = "1", RolId = "1", UsuarioId = "Admin" } );
             return usuRoles;
+        }
+
+        public List<PermisoRol> LlenarPermisosRol()
+        {
+            List<PermisoRol> permisoRols = new List<PermisoRol>();
+            //Rol Admin
+            permisoRols.Add(new PermisoRol(){ Codigo = "1" , PermisoId = "1", RolId = "1" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "2", PermisoId = "2", RolId = "1" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "3", PermisoId = "3", RolId = "1" });
+            return permisoRols;
+        }
+
+        public List<Permiso> LlenarPermisos()
+        {
+            List<Permiso> permisos = new List<Permiso>();
+            permisos.Add(new Permiso(){ Codigo = "1", IdPrograma = "1", Descripcion = "Configuracion de permisos" });
+            permisos.Add(new Permiso(){ Codigo = "2", IdPrograma = "2", Descripcion = "Crear Modulos del menu"});
+            permisos.Add(new Permiso(){ Codigo = "3", IdPrograma = "3", Descripcion = "Registro de Doctores" });
+            return permisos;
+        }
+
+        public List<ProgramaMenu> LlenarProgramas()
+        {
+            List<ProgramaMenu> programas = new List<ProgramaMenu>();
+            programas.Add(new ProgramaMenu(){ Codigo = "1", Nombre = "Configurar Permisos" , Ruta = "/configurarPermisos", IdModulo = "1" });
+            programas.Add(new ProgramaMenu(){ Codigo = "2", Nombre = "Crear Modulo" , Ruta = "/crearModulo", IdModulo = "1" });
+            programas.Add(new ProgramaMenu(){ Codigo = "3", Nombre = "Registro Doctor" ,Ruta = "/registro-doctor", IdModulo = "2" });
+            return programas;
+        }
+
+        public List<ModuleMenu> LlenarMenu()
+        {
+            List<ModuleMenu> modulos = new List<ModuleMenu>();
+            modulos.Add(new ModuleMenu(){ Codigo = "1", Nombre = "Configuracion" });
+            modulos.Add(new ModuleMenu(){ Codigo = "2", Nombre = "Doctor" });
+            return modulos;
         }
 
         public List<Usuario> CrearAdministrador()

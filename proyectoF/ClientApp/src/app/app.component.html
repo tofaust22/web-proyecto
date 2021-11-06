@@ -1,8 +1,39 @@
 
-<app-login></app-login>
-<!-- <body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
-</body> -->
+<div *ngIf="login == false; else loginn">
+  <app-login></app-login> 
+</div>
+ 
+<ng-template #loginn>
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <mat-accordion>
+        <div *ngFor="let modulo of usuario.modulos">
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{modulo.nombre}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let programa of modulo.programas">
+              <p style="padding-left: 5%;">{{programa.nombre}}</p>
+            </div>
+            
+          </mat-expansion-panel>
+        </div>
+        
+      </mat-accordion>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <body>
+        <app-nav-menu (eventoMenu)="drawer.toggle()"></app-nav-menu>
+        <div class="container">
+          <router-outlet></router-outlet>
+        </div>
+      </body> 
+    </div>
+  
+  </mat-drawer-container>
+</ng-template>
+
+ 

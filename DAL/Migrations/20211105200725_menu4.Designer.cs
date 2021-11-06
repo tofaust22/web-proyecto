@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ProyectoContext))]
-    partial class ProyectoContextModelSnapshot : ModelSnapshot
+    [Migration("20211105200725_menu4")]
+    partial class menu4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -361,9 +363,6 @@ namespace DAL.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ruta")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Codigo");
 
                     b.HasIndex("IdModulo");
@@ -375,22 +374,19 @@ namespace DAL.Migrations
                         {
                             Codigo = "1",
                             IdModulo = "1",
-                            Nombre = "Configurar Permisos",
-                            Ruta = "/configurarPermisos"
+                            Nombre = "/configurarPermisos"
                         },
                         new
                         {
                             Codigo = "2",
                             IdModulo = "1",
-                            Nombre = "Crear Modulo",
-                            Ruta = "/crearModulo"
+                            Nombre = "/crearModulo"
                         },
                         new
                         {
                             Codigo = "3",
                             IdModulo = "2",
-                            Nombre = "Registro Doctor",
-                            Ruta = "/registro-doctor"
+                            Nombre = "/registro-doctor"
                         });
                 });
 

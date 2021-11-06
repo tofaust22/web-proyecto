@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DAL;
 using Entity;
@@ -30,7 +31,9 @@ namespace BLL
                     foreach (var item2 in item.Rol.PermisoRoles)
                     {
                         item2.Permiso = _context.Permisos.Find(item2.PermisoId);
+                        
                     }
+                    user.Modulos.AddRange(MapearModulo(item.Rol.PermisoRoles));
                 }
                 user.Roles = roles;
                 return new ResponseClassGeneric<Usuario>(user);
@@ -39,6 +42,36 @@ namespace BLL
             {
                 return new ResponseClassGeneric<Usuario>($"Error en la Aplicacion: {e.Message}");
             }
+        }
+
+
+        public List<ModuleMenu> MapearModulo(List<PermisoRol> permisos)
+        {
+            List<ProgramaMenu> programas = new List<ProgramaMenu>();
+            List<ModuleMenu> modulos = new List<ModuleMenu>();
+            foreach (var item in permisos)
+            {
+                var programa = _context.Programas.Find(item.Permiso.IdPrograma);
+                programas.Add(programa);
+            }
+
+            foreach (var item in programas)
+            {
+                var modulo = _context.Modulos.Find(item.IdModulo);
+                var moduleResponse = modulos.Where( m => m.Codigo == modulo.Codigo ).FirstOrDefault();
+                if(moduleResponse is null)
+                {
+                    modulo.Programas.Add(item);
+                    modulos.Add(modulo);
+                }
+                else
+                {
+                    moduleResponse.Programas.Add(item);
+                    var index = modulos.FindIndex( d => d.Codigo == modulo.Codigo );
+                    modulos[index] = moduleResponse;
+                }
+            }
+            return modulos;
         }
     }
 }
