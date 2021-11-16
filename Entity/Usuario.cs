@@ -25,6 +25,7 @@ namespace Entity
         public List<UsuarioRol> Roles { get; set; }
         [NotMapped]
         public List<ModuleMenu> Modulos { get; set; }
+        public string IdPersona { get; set; }
 
         public Usuario()
         {

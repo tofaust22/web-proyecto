@@ -2,9 +2,11 @@ import { Modulo } from "./modulo";
 
 export class Usuario {
         usuario:string;
+        identificacion: string;
         password: string;
         nombre: string;
         apellidos: string;
+
         tipo: string;
         token: string;
         estado: string;

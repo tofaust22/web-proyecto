@@ -6,6 +6,7 @@ namespace proyectoF.Models
     public class UsuarioInputModels
     {
         public string Usuario { get; set; }
+        public string Identificacion { get; set; }
         public string Password { get; set; }
         public string Tipo { get; set; }
         public string  Token { get; set; }
@@ -33,6 +34,7 @@ namespace proyectoF.Models
             Apellidos = usuario.Apellidos;
             Roles = usuario.Roles;
             Modulos = usuario.Modulos;
+            Identificacion = usuario.IdPersona;
         }
         public List<ModuleMenu> Modulos { get; set; }
         public List<UsuarioRol> Roles { get; set; }

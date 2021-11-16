@@ -123,7 +123,17 @@ namespace proyectoF.Controllers
                 {
                     Codigo = personaInput.Especialidad.Codigo,
                     Nombre = personaInput.Especialidad.Nombre
+                },
+                Usuario = new Usuario()
+                {
+                    User = personaInput.Usuario.Usuario,
+                    Password = personaInput.Usuario.Password,
+                    Nombre = personaInput.Usuario.Nombre,
+                    Apellidos = personaInput.Usuario.Apellidos,
+                    IdPersona = personaInput.Identificacion,
+                    Estado = "Activo",
                 }
+
             };
             doctor.CalcularEdad();
             doctor.CrearAgenda();
@@ -156,6 +166,7 @@ namespace proyectoF.Controllers
                 Password = personaInput.Usuario.Password,
                 Nombre = personaInput.Usuario.Nombre,
                 Apellidos = personaInput.Usuario.Apellidos,
+                IdPersona = personaInput.Identificacion,
                 Estado = "Activo",
                 
             };

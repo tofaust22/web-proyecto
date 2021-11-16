@@ -1,6 +1,6 @@
 
 <div *ngIf="login == false; else loginn">
-  <app-login></app-login> 
+  <app-login (eventoRegister)="login = true"></app-login> 
 </div>
  
 <ng-template #loginn>

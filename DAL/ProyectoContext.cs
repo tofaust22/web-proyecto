@@ -23,6 +23,7 @@ namespace DAL
         public DbSet<Permiso> Permisos { get; set; }
         public DbSet<ProgramaMenu> Programas { get; set; }
         public DbSet<ModuleMenu> Modulos { get; set; }
+        public DbSet<Agenda> Agendas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -139,6 +140,7 @@ namespace DAL
             permisoRols.Add(new PermisoRol(){ Codigo = "10", PermisoId = "8", RolId = "2" });
             //Rol Paciente
             permisoRols.Add(new PermisoRol(){ Codigo = "11", PermisoId = "9", RolId = "3" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "12", PermisoId = "10", RolId = "3" });
             return permisoRols;
         }
 
@@ -154,6 +156,7 @@ namespace DAL
             permisos.Add(new Permiso(){ Codigo = "7", IdPrograma = "7", Descripcion = "Registro de productos" });
             permisos.Add(new Permiso(){ Codigo = "8", IdPrograma = "8", Descripcion = "Consulta de productos" });
             permisos.Add(new Permiso(){ Codigo = "9", IdPrograma = "9", Descripcion = "Registro de citas medicas" });
+            permisos.Add(new Permiso(){ Codigo = "10", IdPrograma = "10", Descripcion = "Consulta de citas pacientes" });
             return permisos;
         }
 
@@ -174,6 +177,7 @@ namespace DAL
             programas.Add(new ProgramaMenu(){ Codigo = "8", Nombre = "Consultar Productos", Ruta = "/productosLista", IdModulo = "4" });
             //cita
             programas.Add(new ProgramaMenu(){ Codigo = "9", Nombre = "Registrar Cita", Ruta = "/registro-cita", IdModulo = "5" });
+            programas.Add(new ProgramaMenu() { Codigo = "10", Nombre = "Consulta Citas", Ruta = "/citas-paciente", IdModulo = "5"});
             return programas;
         }
 

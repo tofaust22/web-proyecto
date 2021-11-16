@@ -30,7 +30,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Codigo");
 
-                    b.ToTable("Agenda");
+                    b.ToTable("Agendas");
                 });
 
             modelBuilder.Entity("Entity.Cita", b =>
@@ -296,6 +296,12 @@ namespace DAL.Migrations
                             Codigo = "9",
                             Descripcion = "Registro de citas medicas",
                             IdPrograma = "9"
+                        },
+                        new
+                        {
+                            Codigo = "10",
+                            Descripcion = "Consulta de citas pacientes",
+                            IdPrograma = "10"
                         });
                 });
 
@@ -383,6 +389,12 @@ namespace DAL.Migrations
                         {
                             Codigo = "11",
                             PermisoId = "9",
+                            RolId = "3"
+                        },
+                        new
+                        {
+                            Codigo = "12",
+                            PermisoId = "10",
                             RolId = "3"
                         });
                 });
@@ -532,6 +544,13 @@ namespace DAL.Migrations
                             IdModulo = "5",
                             Nombre = "Registrar Cita",
                             Ruta = "/registro-cita"
+                        },
+                        new
+                        {
+                            Codigo = "10",
+                            IdModulo = "5",
+                            Nombre = "Consulta Citas",
+                            Ruta = "/citas-paciente"
                         });
                 });
 
@@ -575,6 +594,9 @@ namespace DAL.Migrations
 
                     b.Property<string>("Estado")
                         .HasColumnType("varchar(8)");
+
+                    b.Property<string>("IdPersona")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("varchar(25)");

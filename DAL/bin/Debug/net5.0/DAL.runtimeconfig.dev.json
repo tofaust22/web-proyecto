@@ -2,8 +2,7 @@
   "runtimeOptions": {
     "additionalProbingPaths": [
       "C:\\Users\\norma\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\norma\\.nuget\\packages",
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "C:\\Users\\norma\\.nuget\\packages"
     ]
   }
 }

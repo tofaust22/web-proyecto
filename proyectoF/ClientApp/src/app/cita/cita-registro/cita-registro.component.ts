@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Cita } from 'src/app/models/cita';
 import { Doctor } from 'src/app/models/doctor';
+import { Usuario } from 'src/app/models/usuario';
 import { CitaService } from 'src/app/services/cita.service';
+import { LoginService } from 'src/app/services/login.service';
 import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
@@ -13,7 +15,10 @@ export class CitaRegistroComponent implements OnInit {
   doctores: Doctor[]
   identificacion: string;
   cita: Cita;
-  constructor(private servicePersona: PersonaService, private serviceCita: CitaService) { }
+  usuario: Usuario = new Usuario();
+  constructor(private servicePersona: PersonaService, private serviceCita: CitaService, private authenticationService: LoginService) {
+    this.usuario = this.authenticationService.currentUserValue;
+   }
 
   ngOnInit(): void {
     this.doctores = []
@@ -30,7 +35,7 @@ export class CitaRegistroComponent implements OnInit {
   }
 
   guardar(){
-    this.servicePersona.buscarPaciente(this.identificacion).subscribe(result => {
+    this.servicePersona.buscarPaciente(this.usuario.identificacion).subscribe(result => {
       if(result != null){
         this.cita.paciente = result;
         this.serviceCita.post(this.cita).subscribe(result => {

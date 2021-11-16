@@ -8,6 +8,7 @@ export class Persona {
     segundoApellido: string;
     fechaNacimiento: Date;
     usuario: Usuario;
+    edad: number;
 
     constructor(){
         this.usuario = new Usuario();

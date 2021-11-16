@@ -21,6 +21,11 @@ namespace BLL
             {
                 _context.Personas.Add(doctor);
                 _context.SaveChanges();
+                UsuarioRol usuarioRol = new UsuarioRol();
+                usuarioRol.RolId = "2";
+                usuarioRol.UsuarioId = doctor.Usuario.User;
+                _context.UsuarioRoles.Add(usuarioRol);
+                _context.SaveChanges();
                 return new ResponseClassGeneric<Doctor>(doctor);
             }
             catch(Exception e)
@@ -34,9 +39,10 @@ namespace BLL
             try
             {
                 _context.Personas.Add(paciente);
+                _context.SaveChanges();
                 UsuarioRol usuarioRol = new UsuarioRol();
                 usuarioRol.RolId = "3";
-                usuarioRol.UsuarioId = paciente.Identificacion;
+                usuarioRol.UsuarioId = paciente.Usuario.User;
                 _context.UsuarioRoles.Add(usuarioRol);
                 _context.SaveChanges();
                 return new ResponseClassGeneric<Paciente>(paciente);

@@ -63,6 +63,17 @@ namespace proyectoF.Controllers
             return Ok(new CitaViewModels(response.Object));
         }
 
+        [HttpGet("Pacientee/{identificacion}")]
+        public ActionResult<CitaViewModels> ConsultarCitasPaciente(string identificacion)
+        {
+            var response = _service.CitasPaciente(identificacion);
+            if(response.Error)
+            {
+                return BadRequest(response.Mensaje);
+            }
+            return Ok(response.Objects.Select( c => new CitaViewModels(c)));
+        }
+
 
         private Cita MapearCita(CitaInputModels citaInput)
         {

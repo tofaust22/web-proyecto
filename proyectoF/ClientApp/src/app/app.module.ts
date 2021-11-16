@@ -45,6 +45,11 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { JwtInterceptor } from './services/jwt.interceptor';
 import { DialogPasswordComponent } from './dialog-password/dialog-password.component';
+import { CitasPacientesComponent } from './cita/citas-pacientes/citas-pacientes.component';
+import { MainPerfilComponent } from './perfil/main-perfil/main-perfil.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { PerfilPacienteComponent } from './perfil/perfil-paciente/perfil-paciente.component';
+import { HistoriaClinicaComponent } from './perfil/historia-clinica/historia-clinica.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +76,10 @@ import { DialogPasswordComponent } from './dialog-password/dialog-password.compo
     DialogNotFoundComponent,
     LoginComponent,
     DialogPasswordComponent,
+    CitasPacientesComponent,
+    MainPerfilComponent,
+    PerfilPacienteComponent,
+    HistoriaClinicaComponent,
     
   ],
   imports: [
@@ -93,6 +102,7 @@ import { DialogPasswordComponent } from './dialog-password/dialog-password.compo
     MatIconModule,
     MatExpansionModule,
     ReactiveFormsModule,
+    MatTabsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],

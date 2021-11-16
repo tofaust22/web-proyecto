@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Usuario } from '../models/usuario';
 import { LoginService } from '../services/login.service';
@@ -10,6 +10,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
   user: Usuario;
+  @Output() eventoRegister = new EventEmitter<boolean>();
   constructor(private serviceLogin: LoginService) { }
 
   ngOnInit(): void {
@@ -27,6 +28,10 @@ export class LoginComponent implements OnInit {
           console.log(error.error);
         }
       )
+  }
+
+  evento(){
+    this.eventoRegister.emit(true);
   }
 
 }

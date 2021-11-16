@@ -43,4 +43,11 @@ export class CitaService {
       catchError(this.handleError.handleError<Cita>('consultar cita', null))
     )
   }
+
+  citasPaciente(identificacion: string) : Observable<Cita[]> {
+    return this.http.get<Cita[]>(this.baseUrl + 'api/Cita/Pacientee/'+ identificacion).pipe(
+      tap( _ =>  this.handleError.log('datos enviados')),
+      catchError(this.handleError.handleError<Cita[]>('consultar citas', null))
+    )
+  } 
 }

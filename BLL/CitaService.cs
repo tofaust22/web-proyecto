@@ -121,6 +121,29 @@ namespace BLL
             }
         }
 
+        public ResponseClassGeneric<Cita> CitasPaciente(string identificacion)
+        {
+            try
+            {
+                var citas = _context.Citas.Where( p => p.IdPaciente == identificacion  ).OrderBy(f => f.FechaRegistro)
+                .ToList();
+
+                foreach (var item in citas)
+                {
+                    var agenda = _context.Agendas.Find(item.CodigoAgenda);
+                    var doctor = _context.Doctores.Include(a => a.Agenda).Where( d => d.Agenda.Codigo == agenda.Codigo).FirstOrDefault();
+                    doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
+                    item.Doctor = doctor;
+                    item.Paciente = _context.Pacientes.Find(item.IdPaciente);
+                }
+                return new ResponseClassGeneric<Cita>(citas);
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Cita>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
+
         public ResponseClassGeneric<Cita> AtenderCita(string codigo, string idDoctor)
         {
             try
