@@ -27,8 +27,8 @@ namespace BLL
                     return new ResponseClassGeneric<Cita>("Error al apartar la cita, el doctor no existe.");
                 }
                 doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
-                var citas = _context.Citas.Where( c => c.CodigoAgenda == doctor.Agenda.Codigo && c.FechaRegistro > DateTime.Now ).OrderBy(f => f.FechaRegistro).ToList();
-                DateTime fecha = DateTime.Now;
+                var citas = _context.Citas.Where( c => c.CodigoAgenda == doctor.Agenda.Codigo && c.FechaRegistro > DateTime.Now &&  (c.Estado == "Activa" )  ).OrderBy(f => f.FechaRegistro).ToList();
+                DateTime fecha = cita.FechaRegistro;
                 if(citas.Count == 0)
                 {
                     fecha = fecha.AddMinutes(30);
@@ -48,13 +48,6 @@ namespace BLL
                 _context.Citas.Add(cita);
                 _context.SaveChanges();
                 cita.Doctor = doctor;
-                var paciente = _context.Pacientes.Include(p => p.Historia.Informes).FirstOrDefault();
-                    foreach (var item2 in paciente.Historia.Informes)
-                    {
-                        var informe = _context.Informes.Include(d => d.Detalles)
-                                            .Where(d => d.Codigo == item2.Codigo).FirstOrDefault();
-                        item2.Detalles = informe.Detalles;
-                    }
                 return new ResponseClassGeneric<Cita>(cita);
             }
             catch(Exception e)
@@ -104,12 +97,14 @@ namespace BLL
                 doctor.Especialidad = _context.Especialidades.Find(doctor.IdEspecialidad);
 
                 var citas = _context.Citas
-                .Where( c => c.CodigoAgenda == doctor.Agenda.Codigo && c.FechaRegistro > DateTime.Now )
+                .Where( c => c.CodigoAgenda == doctor.Agenda.Codigo && c.FechaRegistro > DateTime.Now && (c.Estado == "Activa" )  )
                 .OrderBy(f => f.FechaRegistro).ToList();
                 
                 foreach (var item in citas)
                 {
                     item.Doctor = doctor;
+                    var fecha = item.FechaRegistro;
+                    var fecha2 = DateTime.Now;
                     item.Paciente = _context.Pacientes.Find(item.IdPaciente);
                 };
                 

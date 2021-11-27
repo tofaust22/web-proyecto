@@ -81,6 +81,10 @@ namespace DAL
                 .HasOne<ProgramaMenu>().WithMany()
                 .HasForeignKey( p => p.IdPrograma );
 
+            modelBuilder.Entity<Informe>()
+                .HasOne<Historia>().WithMany()
+                .HasForeignKey( i => i.IdHistoria );
+
             modelBuilder.Entity<Especialidad>()
                 .HasData(LlenarEspecialidades());
 
@@ -138,9 +142,11 @@ namespace DAL
 
             //Rol Doctor
             permisoRols.Add(new PermisoRol(){ Codigo = "10", PermisoId = "8", RolId = "2" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "13", PermisoId = "11", RolId = "2" });
             //Rol Paciente
             permisoRols.Add(new PermisoRol(){ Codigo = "11", PermisoId = "9", RolId = "3" });
             permisoRols.Add(new PermisoRol(){ Codigo = "12", PermisoId = "10", RolId = "3" });
+            permisoRols.Add(new PermisoRol(){ Codigo = "14", PermisoId = "12", RolId = "3" });
             return permisoRols;
         }
 
@@ -157,6 +163,8 @@ namespace DAL
             permisos.Add(new Permiso(){ Codigo = "8", IdPrograma = "8", Descripcion = "Consulta de productos" });
             permisos.Add(new Permiso(){ Codigo = "9", IdPrograma = "9", Descripcion = "Registro de citas medicas" });
             permisos.Add(new Permiso(){ Codigo = "10", IdPrograma = "10", Descripcion = "Consulta de citas pacientes" });
+            permisos.Add(new Permiso() { Codigo = "11", IdPrograma = "11", Descripcion = "Consulta la agenda del doctor"});
+            permisos.Add(new Permiso(){ Codigo = "12", IdPrograma = "12", Descripcion = "Consulta el perfil, donde esta la informacion personal e historia" });
             return permisos;
         }
 
@@ -178,6 +186,10 @@ namespace DAL
             //cita
             programas.Add(new ProgramaMenu(){ Codigo = "9", Nombre = "Registrar Cita", Ruta = "/registro-cita", IdModulo = "5" });
             programas.Add(new ProgramaMenu() { Codigo = "10", Nombre = "Consulta Citas", Ruta = "/citas-paciente", IdModulo = "5"});
+            //Agenda
+            programas.Add(new ProgramaMenu(){ Codigo = "11", Nombre = "Consultar Agenda", Ruta = "/lista-citas", IdModulo = "6"});
+            //Perfil
+            programas.Add(new ProgramaMenu(){ Codigo = "12", Nombre = "Consultar Perfil", Ruta = "/history-paciente", IdModulo = "7"  });
             return programas;
         }
 
@@ -189,6 +201,8 @@ namespace DAL
             modulos.Add(new ModuleMenu(){ Codigo = "3", Nombre = "Paciente" });
             modulos.Add(new ModuleMenu(){ Codigo = "4", Nombre = "Producto" });
             modulos.Add(new ModuleMenu(){ Codigo = "5", Nombre = "Cita" });
+            modulos.Add(new ModuleMenu(){ Codigo = "6", Nombre = "Agenda"});
+            modulos.Add(new ModuleMenu(){ Codigo = "7", Nombre = "Perfil" });
             return modulos;
         }
 

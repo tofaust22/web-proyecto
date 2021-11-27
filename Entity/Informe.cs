@@ -21,7 +21,12 @@ namespace Entity
         public Cita Cita { get; set; }
         public string IdCita { get; set; }
         public bool Estado { get; set; }
+        public string IdHistoria { get; set; }
 
+        public Informe()
+        {
+            Detalles = new List<DetalleProducto>();
+        }
         public void AgregarDoctor(Doctor doctor)
         {
             Doctor = doctor;
@@ -40,7 +45,7 @@ namespace Entity
             Detalle.Fecha = fecha;
             Detalle.Valor = producto.Valor;
             Detalle.AgregarProducto(producto);
-
+            Detalles.Add(Detalle);
         }
     }
 }

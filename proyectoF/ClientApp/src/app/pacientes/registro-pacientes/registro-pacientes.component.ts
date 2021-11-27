@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DialogPasswordComponent } from 'src/app/dialog-password/dialog-password.component';
 import { Paciente } from 'src/app/models/paciente';
 import { Usuario } from 'src/app/models/usuario';
@@ -13,7 +14,8 @@ import { PersonaService } from 'src/app/services/persona.service';
 export class RegistroPacientesComponent implements OnInit {
 
   paciente: Paciente;
-  constructor(private servicePersona: PersonaService, public dialog: MatDialog) { }
+  constructor(private servicePersona: PersonaService, public dialog: MatDialog,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.paciente = new Paciente();
@@ -39,7 +41,8 @@ export class RegistroPacientesComponent implements OnInit {
 
         this.servicePersona.postPaciente(this.paciente).subscribe(result => {
           if(result != null){
-            window.location.reload();
+            this.router.navigateByUrl('/');
+            //window.location.reload();
         }
         });
         

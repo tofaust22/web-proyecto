@@ -30,6 +30,18 @@ namespace proyectoF.Controllers
             return Ok(new InformeViewsModels(response.Object));
         }
 
+
+        [HttpGet("historia/{identificacion}")]
+        public ActionResult<string> ConsultarHistoriaPaciente(string identificacion)
+        {
+            var response = _service.ConsultarHistoriaPaciente(identificacion);
+            if(response.Error)
+            {
+                return BadRequest(response.Mensaje);
+            }
+            return Ok(response.Object);
+        }
+
         private Informe MapearInforme(InformeInputModels informeInput)
         {
             var informe = new Informe()

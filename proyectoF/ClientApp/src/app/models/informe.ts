@@ -10,5 +10,6 @@ export class Informe {
     idPaciente: string;
     diagnostico: string;
     estado: boolean;
+    detalles: any;
     cita: Cita;
 }

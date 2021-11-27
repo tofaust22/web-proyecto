@@ -22,6 +22,12 @@ export class AppComponent  {
         this.usuario = currentUser;
       }
     }
+
+
+    logOut(){
+      sessionStorage.removeItem('login');
+      window.location.reload();
+    }
     
     
 }

@@ -20,7 +20,7 @@ namespace Entity
         public void AgregarProducto(Producto producto)
         {
             Producto = producto;
-            Producto.Codigo = producto.Codigo;
+            IdProducto = producto.Codigo;
         }
     }
 }

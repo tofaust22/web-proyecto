@@ -9,6 +9,7 @@ namespace Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Codigo { get; set; }
+        [NotMapped]
         public List<Informe> Informes { get; set; }
 
 

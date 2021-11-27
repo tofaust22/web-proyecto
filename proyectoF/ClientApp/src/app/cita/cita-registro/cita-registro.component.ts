@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cita } from 'src/app/models/cita';
 import { Doctor } from 'src/app/models/doctor';
 import { Usuario } from 'src/app/models/usuario';
@@ -16,7 +17,8 @@ export class CitaRegistroComponent implements OnInit {
   identificacion: string;
   cita: Cita;
   usuario: Usuario = new Usuario();
-  constructor(private servicePersona: PersonaService, private serviceCita: CitaService, private authenticationService: LoginService) {
+  constructor(private servicePersona: PersonaService, private router: Router,
+     private serviceCita: CitaService, private authenticationService: LoginService) {
     this.usuario = this.authenticationService.currentUserValue;
    }
 
@@ -40,6 +42,7 @@ export class CitaRegistroComponent implements OnInit {
         this.cita.paciente = result;
         this.serviceCita.post(this.cita).subscribe(result => {
           if(result != null){
+            this.router.navigateByUrl('/citas-paciente');
             console.log(result);
           }
         })

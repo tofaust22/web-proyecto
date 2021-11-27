@@ -162,22 +162,22 @@ namespace DAL.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("HistoriaCodigo")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("IdCita")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("IdDoctor")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Codigo");
+                    b.Property<string>("IdHistoria")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("HistoriaCodigo");
+                    b.HasKey("Codigo");
 
                     b.HasIndex("IdCita");
 
                     b.HasIndex("IdDoctor");
+
+                    b.HasIndex("IdHistoria");
 
                     b.ToTable("Informes");
                 });
@@ -219,6 +219,16 @@ namespace DAL.Migrations
                         {
                             Codigo = "5",
                             Nombre = "Cita"
+                        },
+                        new
+                        {
+                            Codigo = "6",
+                            Nombre = "Agenda"
+                        },
+                        new
+                        {
+                            Codigo = "7",
+                            Nombre = "Perfil"
                         });
                 });
 
@@ -302,6 +312,18 @@ namespace DAL.Migrations
                             Codigo = "10",
                             Descripcion = "Consulta de citas pacientes",
                             IdPrograma = "10"
+                        },
+                        new
+                        {
+                            Codigo = "11",
+                            Descripcion = "Consulta la agenda del doctor",
+                            IdPrograma = "11"
+                        },
+                        new
+                        {
+                            Codigo = "12",
+                            Descripcion = "Consulta el perfil, donde esta la informacion personal e historia",
+                            IdPrograma = "12"
                         });
                 });
 
@@ -387,6 +409,12 @@ namespace DAL.Migrations
                         },
                         new
                         {
+                            Codigo = "13",
+                            PermisoId = "11",
+                            RolId = "2"
+                        },
+                        new
+                        {
                             Codigo = "11",
                             PermisoId = "9",
                             RolId = "3"
@@ -395,6 +423,12 @@ namespace DAL.Migrations
                         {
                             Codigo = "12",
                             PermisoId = "10",
+                            RolId = "3"
+                        },
+                        new
+                        {
+                            Codigo = "14",
+                            PermisoId = "12",
                             RolId = "3"
                         });
                 });
@@ -551,6 +585,20 @@ namespace DAL.Migrations
                             IdModulo = "5",
                             Nombre = "Consulta Citas",
                             Ruta = "/citas-paciente"
+                        },
+                        new
+                        {
+                            Codigo = "11",
+                            IdModulo = "6",
+                            Nombre = "Consultar Agenda",
+                            Ruta = "/lista-citas"
+                        },
+                        new
+                        {
+                            Codigo = "12",
+                            IdModulo = "7",
+                            Nombre = "Consultar Perfil",
+                            Ruta = "/history-paciente"
                         });
                 });
 
@@ -730,10 +778,6 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Entity.Informe", b =>
                 {
-                    b.HasOne("Entity.Historia", null)
-                        .WithMany("Informes")
-                        .HasForeignKey("HistoriaCodigo");
-
                     b.HasOne("Entity.Cita", null)
                         .WithMany()
                         .HasForeignKey("IdCita");
@@ -741,6 +785,10 @@ namespace DAL.Migrations
                     b.HasOne("Entity.Doctor", null)
                         .WithMany()
                         .HasForeignKey("IdDoctor");
+
+                    b.HasOne("Entity.Historia", null)
+                        .WithMany()
+                        .HasForeignKey("IdHistoria");
                 });
 
             modelBuilder.Entity("Entity.Permiso", b =>
@@ -808,11 +856,6 @@ namespace DAL.Migrations
                         .HasForeignKey("HistoriaCodigo");
 
                     b.Navigation("Historia");
-                });
-
-            modelBuilder.Entity("Entity.Historia", b =>
-                {
-                    b.Navigation("Informes");
                 });
 
             modelBuilder.Entity("Entity.Informe", b =>

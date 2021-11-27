@@ -96,14 +96,17 @@ namespace BLL
         {
             try
             {
-                var response = _context.Pacientes.Include( p => p.Historia.Informes)
+                var response = _context.Pacientes.Include( p => p.Historia)
                                                 .Where( p => p.Identificacion == identificacion).FirstOrDefault();
                 if(response is null)
                 {
                     return new ResponseClassGeneric<Informe>("No existe el paciente");
                 }
-                response.Historia.AgregarInforme(informe);
-                _context.Pacientes.Update(response);
+                informe.IdHistoria = response.Historia.Codigo;
+                _context.Informes.Add(informe);
+                var cita = _context.Citas.Find(informe.Cita.Codigo);
+                cita.Estado = "Terminado";
+                _context.Citas.Update(cita);
                 _context.SaveChanges();
                 return new ResponseClassGeneric<Informe>(informe);
 
@@ -111,6 +114,35 @@ namespace BLL
             catch(Exception e)
             {
                 return new ResponseClassGeneric<Informe>($"Error en la Aplicacion: {e.Message}");
+            }
+        }
+
+        public ResponseClassGeneric<Historia> ConsultarHistoriaPaciente(string id)
+        {
+            try
+            {
+                var paciente = _context.Pacientes.Include( p => p.Historia).Where( p => p.Identificacion == id).FirstOrDefault();
+                if(paciente is null)
+                {
+                    return new ResponseClassGeneric<Historia>($"No existe el paciente");
+                }
+                var informes = _context.Informes.Include( i => i.Detalles ).Where( p => p.IdHistoria == paciente.Historia.Codigo).ToList();
+                foreach (var item in informes)
+                {
+                    item.Cita  = _context.Citas.Find(item.IdCita);
+                    
+                    foreach (var item2 in item.Detalles)
+                    {
+                        item2.Producto = _context.Productos.Find(item2.IdProducto);
+                    }
+                }
+                var historia = paciente.Historia;
+                historia.Informes = informes;
+                return new ResponseClassGeneric<Historia>(historia);
+            }
+            catch(Exception e)
+            {
+                return new ResponseClassGeneric<Historia>($"Error en la Aplicacion: {e.Message}");
             }
         }
 

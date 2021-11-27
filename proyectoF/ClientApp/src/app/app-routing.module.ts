@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'registro-doctor', component: DoctorRegistroComponent },
   { path: 'registro-cita', component:  CitaRegistroComponent},
   { path: 'consulta-doctores', component: DoctorConsultarComponent},
-  { path: 'lista-citas/:id', component: ListaCitasComponent},
+  { path: 'lista-citas', component: ListaCitasComponent},
   { path: 'informe/:codigo/:idDoctor', component: InformeRegistroComponent},
   { path: 'productosLista', component: ProductoConsultaComponent},
   { path: 'login', component: LoginComponent} ,
